@@ -23,10 +23,10 @@ jobs:
         msbuild-version: latest  # You can specify a specific version if needed
 
     - name: Restore dependencies
-      run: nuget restore JRBAWebApplication2.csproj
+      run: nuget restore JRBAWebApplication2.sln
 
     - name: Build
-      run: msbuild JRBAWebApplication2.csproj /p:Configuration=Release
+      run: msbuild JRBAWebApplication2.sln /p:Configuration=Release
 
     - name: Test
       run: |
