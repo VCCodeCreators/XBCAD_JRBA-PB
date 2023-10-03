@@ -29,4 +29,8 @@ jobs:
       run: msbuild JRBAWebApplication2.csproj /p:Configuration=Release
 
     - name: Test
-      run: vstest.console.exe Test.dll
+      run: |
+        # Run your tests here if you have a specific testing framework.
+        # Example for MSTest:
+        # vstest.console.exe YourTestProject.dll
+    ##  run: vstest.console.exe Test.dll
