@@ -13,20 +13,21 @@ namespace JRBAWebApplication2.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        private ApplicationSignInManager _signInManager;
+		//Property Decloration\\
+		private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
         }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+		//----------------------------------------------------------------------------------------------------\\
+		public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
-        public ApplicationSignInManager SignInManager
+		//----------------------------------------------------------------------------------------------------\\
+		public ApplicationSignInManager SignInManager
         {
             get
             {
@@ -37,8 +38,8 @@ namespace JRBAWebApplication2.Controllers
                 _signInManager = value; 
             }
         }
-
-        public ApplicationUserManager UserManager
+		//----------------------------------------------------------------------------------------------------\\
+		public ApplicationUserManager UserManager
         {
             get
             {
@@ -50,9 +51,9 @@ namespace JRBAWebApplication2.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/Index
+		public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -75,9 +76,9 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemoveLogin
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/RemoveLogin
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
@@ -99,16 +100,16 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/AddPhoneNumber
+		public ActionResult AddPhoneNumber()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/AddPhoneNumber
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
@@ -130,9 +131,9 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
-        //
-        // POST: /Manage/EnableTwoFactorAuthentication
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/EnableTwoFactorAuthentication
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
@@ -145,9 +146,9 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/DisableTwoFactorAuthentication
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
@@ -169,9 +170,9 @@ namespace JRBAWebApplication2.Controllers
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
-        //
-        // POST: /Manage/VerifyPhoneNumber
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/VerifyPhoneNumber
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
@@ -194,9 +195,9 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemovePhoneNumber
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/RemovePhoneNumber
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
         {
@@ -213,16 +214,16 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
-        // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/ChangePassword
+		public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/ChangePassword
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -244,16 +245,16 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/SetPassword
-        public ActionResult SetPassword()
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/SetPassword
+		public ActionResult SetPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/SetPassword
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/SetPassword
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
@@ -276,9 +277,9 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/ManageLogins
-        public async Task<ActionResult> ManageLogins(ManageMessageId? message)
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/ManageLogins
+		public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
@@ -299,9 +300,9 @@ namespace JRBAWebApplication2.Controllers
             });
         }
 
-        //
-        // POST: /Manage/LinkLogin
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Manage/LinkLogin
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
@@ -309,9 +310,9 @@ namespace JRBAWebApplication2.Controllers
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
-        //
-        // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback()
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Manage/LinkLoginCallback
+		public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
@@ -321,8 +322,8 @@ namespace JRBAWebApplication2.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
-
-        protected override void Dispose(bool disposing)
+		//----------------------------------------------------------------------------------------------------\\
+		protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
             {
@@ -387,3 +388,4 @@ namespace JRBAWebApplication2.Controllers
 #endregion
     }
 }
+//------------------------------------------------End of File----------------------------------------------------\\

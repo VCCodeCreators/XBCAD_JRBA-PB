@@ -12,15 +12,15 @@ namespace JRBAWebApplication2.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
+		//----------------------------------------------------------------------------------------------------\\
+		public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
-        public ActionResult Contact()
+		//----------------------------------------------------------------------------------------------------\\
+		public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
@@ -28,3 +28,4 @@ namespace JRBAWebApplication2.Controllers
         }
     }
 }
+//------------------------------------------------End of File----------------------------------------------------\\

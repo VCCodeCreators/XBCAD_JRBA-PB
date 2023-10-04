@@ -15,20 +15,21 @@ namespace JRBAWebApplication2.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
+		//Property Decloration\\
+		private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
         }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+		//----------------------------------------------------------------------------------------------------\\
+		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
-        public ApplicationSignInManager SignInManager
+		//----------------------------------------------------------------------------------------------------\\
+		public ApplicationSignInManager SignInManager
         {
             get
             {
@@ -39,8 +40,8 @@ namespace JRBAWebApplication2.Controllers
                 _signInManager = value; 
             }
         }
-
-        public ApplicationUserManager UserManager
+		//----------------------------------------------------------------------------------------------------\\
+		public ApplicationUserManager UserManager
         {
             get
             {
@@ -51,19 +52,17 @@ namespace JRBAWebApplication2.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Account/Login
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/Login
+		[AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/Login
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
@@ -91,9 +90,9 @@ namespace JRBAWebApplication2.Controllers
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/VerifyCode
+		[AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -104,9 +103,9 @@ namespace JRBAWebApplication2.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/VerifyCode
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
@@ -134,17 +133,18 @@ namespace JRBAWebApplication2.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/Register
+		[AllowAnonymous]
         public ActionResult Register()
         {
+            
             return View();
         }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/Register
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
@@ -156,14 +156,15 @@ namespace JRBAWebApplication2.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+					// For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+					// Send an email with this link
+					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+					await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+
+					return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -172,9 +173,9 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ConfirmEmail
+		[AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -185,17 +186,17 @@ namespace JRBAWebApplication2.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ForgotPassword
+		[AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ForgotPassword
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/ForgotPassword
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
@@ -221,25 +222,25 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ForgotPasswordConfirmation
+		[AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ResetPassword
+		[AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
 
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/ResetPassword
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
@@ -263,17 +264,17 @@ namespace JRBAWebApplication2.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ResetPasswordConfirmation
+		[AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/ExternalLogin
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
@@ -282,9 +283,9 @@ namespace JRBAWebApplication2.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
-        // GET: /Account/SendCode
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/SendCode
+		[AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -297,9 +298,9 @@ namespace JRBAWebApplication2.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/SendCode
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
@@ -317,9 +318,9 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ExternalLoginCallback
+		[AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -347,9 +348,9 @@ namespace JRBAWebApplication2.Controllers
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/ExternalLoginConfirmation
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
@@ -385,9 +386,9 @@ namespace JRBAWebApplication2.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
+		//----------------------------------------------------------------------------------------------------\\
+		// POST: /Account/LogOff
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -395,15 +396,15 @@ namespace JRBAWebApplication2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
+		//----------------------------------------------------------------------------------------------------\\
+		// GET: /Account/ExternalLoginFailure
+		[AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
-
-        protected override void Dispose(bool disposing)
+		//----------------------------------------------------------------------------------------------------\\
+		protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -422,10 +423,11 @@ namespace JRBAWebApplication2.Controllers
 
             base.Dispose(disposing);
         }
+		//----------------------------------------------------------------------------------------------------\\
 
-        #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
+		#region Helpers
+		// Used for XSRF protection when adding external logins
+		private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -482,4 +484,6 @@ namespace JRBAWebApplication2.Controllers
         }
         #endregion
     }
+	
 }
+//------------------------------------------------End of File----------------------------------------------------\\
