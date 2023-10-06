@@ -251,8 +251,14 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Dash.cshtml">
-      <BrowseToURL>~/Home/Dashboard</BrowseToURL>
+      <BrowseToURL>~/Home/Dash</BrowseToURL>
     </Content>
+    <Content Include="Views\Home\DroughtView.cshtml" />
+    <Content Include="Views\Home\UploadMaterial.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
+    <Content Include="Views\Home\Estimations.cshtml" />
+    <Content Include="Views\Home\Material.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
