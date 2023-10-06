@@ -13,8 +13,13 @@ namespace JRBAWebApplication2.Models
 		//[Required(ErrorMessage = "The UserRoles field is required.")]
 		public string UserRoles { get; set; }
 
+		// Primary key property
 		[Key]
-		public String UserId { get; set; } // Foreign key property
+		public String UserId { get; set; } 
+
+		public string FirstName { get; set; }
+
+		public string LastName { get; set; }
 
 
 		[Required]
