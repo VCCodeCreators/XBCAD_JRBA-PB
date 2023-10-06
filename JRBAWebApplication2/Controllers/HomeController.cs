@@ -44,7 +44,6 @@ namespace JRBAWebApplication2.Controllers
             return View();
         }
 
-        public ActionResult About()
 		//----------------------------------------------------------------------------------------------------\\
 		public ActionResult About()
         {
