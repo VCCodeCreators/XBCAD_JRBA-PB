@@ -1,0 +1,340 @@
+﻿body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Encode Sans', sans-serif;
+}
+
+.container {
+    width: 1440px;
+    height: 900px;
+    position: relative;
+    background: white;
+    box-shadow: 0px 3px 6px rgba(18, 15, 40, 0.12);
+}
+
+.background-image {
+    width: 747px;
+    height: 903px;
+    position: absolute;
+}
+
+.login-box {
+    width: 531px;
+    height: 520px;
+    position: absolute;
+    left: 845px;
+    top: 190px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.input-group {
+    height: 59px;
+    padding-bottom: 1px;
+    padding-right: 1px;
+    position: absolute;
+    left: 24px;
+    background: rgba(0, 0, 0, 0);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1px;
+    display: inline-flex;
+}
+
+.input-label {
+    color: #424856;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+
+.input-field {
+    align-self: stretch;
+    height: 35px;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 360px;
+    background: #F3F4F6;
+    border-radius: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    display: inline-flex;
+}
+
+.input-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+}
+
+.icon-line {
+    width: 12px;
+    height: 10.40px;
+    border: 0.80px #171A1F solid;
+}
+
+.input-text {
+    color: #BDC1CA;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+
+.password-field {
+    width: 482px;
+    height: 35px;
+    position: relative;
+    background: #F3F4F6;
+    border-radius: 12px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+}
+
+.password-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+
+.icon-line:nth-child(1) {
+    width: 12px;
+    height: 8.80px;
+    left: 2px;
+    top: 3.60px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(2) {
+    width: 2.40px;
+    height: 2.40px;
+    left: 5.60px;
+    top: 5.60px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(3) {
+    width: 2.40px;
+    height: 2.40px;
+    left: 8px;
+    top: 8px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(4) {
+    width: 11.20px;
+    height: 11.20px;
+    left: 2.40px;
+    top: 2.40px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(5) {
+    width: 10.40px;
+    height: 6.40px;
+    left: 2.80px;
+    top: 7.60px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(6) {
+    width: 5.60px;
+    height: 4px;
+    left: 5.20px;
+    top: 2px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.icon-line:nth-child(7) {
+    width: 2.40px;
+    height: 2.40px;
+    left: 6.80px;
+    top: 9.60px;
+    position: absolute;
+    border: 0.80px #171A1F solid;
+}
+
+.sign-in-button {
+    width: 483px;
+    height: 35px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 218px;
+    padding-right: 224px;
+    left: 24px;
+    top: 300px;
+    position: absolute;
+    background: #025034;
+    border-radius: 12px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    word-wrap: break-word;
+    border: none;
+    cursor: pointer;
+}
+
+.logo {
+    width: 189px;
+    height: 106px;
+    left: 1193px;
+    top: 39px;
+    position: absolute;
+    border-radius: 12px;
+}
+
+.sign-up-link {
+    left: 162px;
+    top: 360px;
+    position: absolute;
+}
+
+    .sign-up-link span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        word-wrap: break-word;
+    }
+
+    .sign-up-link .sign-up {
+        color: #025034;
+        cursor: pointer;
+    }
+
+.remember-me {
+    width: 127px;
+    height: 22px;
+    left: 24px;
+    top: 254px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+}
+
+.remember-text {
+    width: 105px;
+    color: #171A1F;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    background: #025034;
+    border-radius: 4px;
+}
+
+.forgot-password {
+    left: 387px;
+    top: 254px;
+    position: absolute;
+    color: #025034;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.or-divider {
+    width: 219px;
+    height: 0px;
+    left: 288px;
+    top: 417px;
+    position: absolute;
+    border: 1px #DEE1E6 solid;
+}
+
+.divider-line {
+    height: 1px;
+    width: 100%;
+    background-color: #DEE1E6;
+}
+
+.or-text {
+    left: 257px;
+    top: 406px;
+    position: absolute;
+    color: #565D6D;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+
+.social-button {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    position: absolute;
+    border-radius: 22px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    cursor: pointer;
+    border: none;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+}
+
+.icon-line:nth-child(8) {
+    width: 3.42px;
+    height: 4px;
+    background: white;
+}
+
+.icon-line:nth-child(9) {
+    width: 12px;
+    height: 10.69px;
+    border: 1px white solid;
+}
+
+.icon-line:nth-child(10) {
+    width: 16px;
+    height: 15.90px;
+    background: white;
+}
+
+.icon-line:nth-child(11) {
+    width: 14.78px;
+    height: 15px;
+    background: white;
+}

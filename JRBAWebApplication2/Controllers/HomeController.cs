@@ -12,6 +12,39 @@ namespace JRBAWebApplication2.Controllers
         {
             return View();
         }
+
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        public ActionResult Estimations()
+        {
+            return View();
+        }
+        public ActionResult Material()
+        {
+            return View();
+        }
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
+        public ActionResult UploadMaterial()
+        {
+            return View();
+        }
+        public ActionResult DroughtView()
+        {
+            return View();
+        }
+
+        public ActionResult Dash()
+        {
+            return View();
+        }
+
+        public ActionResult About()
 		//----------------------------------------------------------------------------------------------------\\
 		public ActionResult About()
         {

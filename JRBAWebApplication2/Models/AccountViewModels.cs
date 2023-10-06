@@ -61,10 +61,17 @@ namespace JRBAWebApplication2.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-	//----------------------------------------------------------------------------------------------------\\
-	public class RegisterViewModel
-    {
 
+    public class RegisterViewModel
+    {
+       
+
+        [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
