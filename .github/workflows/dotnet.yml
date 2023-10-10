@@ -18,9 +18,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2  # Use the setup-msbuild action
+      uses: microsoft/setup-msbuild@v1.0.2
       with:
-        msbuild-version: latest  # You can specify a specific version if needed
+        msbuild-version: latest
 
     - name: Restore dependencies
       run: nuget restore JRBAWebApplication2.sln
@@ -28,9 +28,14 @@ jobs:
     - name: Build
       run: msbuild JRBAWebApplication2.sln /p:Configuration=Release
 
-    - name: Test
-      run: |
-        # Run your tests here if you have a specific testing framework.
-        # Example for MSTest:
-        # vstest.console.exe YourTestProject.dll
-    ##  run: vstest.console.exe Test.dll
+    - name: Run Unit Tests
+      run: dotnet test --filter Category=Unit
+
+    - name: Run Integration Tests
+      run: dotnet test --filter Category=Integration
+
+    - name: Run Regression Tests
+      run: dotnet test --filter Category=Regression
+
+    - name: Run Functional Tests
+      run: dotnet test --filter Category=Functional
