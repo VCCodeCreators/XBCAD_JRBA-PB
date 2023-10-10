@@ -4076,11 +4076,10 @@ body {
 
 .sidebar {
     height: 100vh;
-    width: 70px; /* Set initial width to show only icons */
+    width: 250px; /* Set initial width to show icons and text */
     background-color: #333;
     position: fixed;
     overflow-x: hidden;
-    transition: width 0.3s; /* Only transition the width */
     margin-top: 56px; /* Adjusted for top navbar */
 }
 
@@ -4090,40 +4089,22 @@ body {
         font-size: 25px;
         color: #818181;
         display: block;
-        transition: 0.3s;
     }
 
         .sidebar a span {
-            display: none; /* Hide text initially */
+            display: inline-block; /* Show text initially */
         }
 
-    .sidebar:hover {
-        width: 250px; /* Expand on hover */
-    }
-
-    .sidebar a:hover span {
-        display: inline-block; /* Show text on hover */
-    }
-
-    .sidebar a i {
-        display: inline-block;
-    }
-
 .main-content {
-    transition: margin-left 0.3s; /* Transition the margin */
-    margin-left: 70px; /* Adjusted for smaller sidebar */
+    margin-left: 250px; /* Adjusted for sidebar width */
     margin-top: 56px; /* Add margin to separate from top navbar */
     padding: 20px;
-    width: calc(100% - 70px); /* Adjusted for smaller sidebar */
+    width: calc(100% - 250px); /* Adjusted for sidebar width */
     background-color: white;
     color: black; /* Change text color for better visibility */
 }
 
 
-.sidebar:hover + .main-content {
-    margin-left: 250px; /* Adjusted for expanded sidebar */
-    width: calc(100% - 250px); /* Adjusted for expanded sidebar */
-}
 
 .navbar-collapse {
   flex-basis: 100%;
