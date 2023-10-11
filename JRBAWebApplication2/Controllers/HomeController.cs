@@ -86,12 +86,22 @@ namespace JRBAWebApplication2.Controllers
 
 		public ActionResult DroughtView()
         {
-            return View();
+			//DroughtView Outputs
+			ViewBag.PromoName = "";
+			ViewBag.StartDate = "";
+			ViewBag.EndDate = "";
+			ViewBag.DroughtLevel = "";
+			ViewBag.Comments = "";
+
+
+			return View();
         }
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Dash()
         {
+			ViewBag.Name = "";
+			ViewBag.Comment = "";
             return View();
         }
 
