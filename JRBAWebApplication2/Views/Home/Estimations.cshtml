@@ -1,4 +1,4 @@
-﻿
+﻿@using JRBAWebApplication2.Models
 @{
     ViewBag.Title = "Estimations";
 }
@@ -140,7 +140,7 @@
             <div style="width: 0px; height: 3px; border: 1px #171A1F solid"></div>
         </div>
     </div>
-    <div style="left: 138px; top: 547px; position: absolute; color: #171A1F; font-size: 30px; font-family: Epilogue; font-weight: 700; line-height: 46px; word-wrap: break-word">R 4235,34 p/m</div>
+    <div style="left: 138px; top: 547px; position: absolute; color: #171A1F; font-size: 30px; font-family: Epilogue; font-weight: 700; line-height: 46px; word-wrap: break-word">@ViewBag.EstimatedAmount</div>
     <div style="left: 46px; top: 669px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit application form</div>
     <div style="left: 58px; top: 57px; position: absolute; color: #171A1F; font-size: 28px; font-family: Epilogue; font-weight: 700; line-height: 42px; word-wrap: break-word">Estimations</div>
     <div style="left: 46px; top: 629px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit Info sheet</div>
