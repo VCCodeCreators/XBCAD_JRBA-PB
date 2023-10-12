@@ -27,19 +27,19 @@ namespace JRBAWebApplication2.Controllers
 			
 			int WaterDuty = 0;
 					var EstimationModel = new CalculationModels();
-            if (EstimationModel.CropType == "Sugarcane" && EstimationModel.Location == "Komati/Lomati")
+            if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Komati/Lomati"))
             {
                  WaterDuty = 12000;
             }
-			else if (EstimationModel.CropType == "Sugarcane" && EstimationModel.Location == "Malkerns")
+			else if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Malkerns"))
 			{
 				 WaterDuty = 10880;
 			}
-			else if (EstimationModel.CropType == "Sugarcane" && EstimationModel.Location == "Usuthu/Other")
+			else if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Usuthu/Other"))
 			{
 				 WaterDuty = 13650;
 			}
-			else if (EstimationModel.CropType == "Other")
+			else if (EstimationModel.CropType.Equals( "Other"))
 			{
 				 WaterDuty = 8000;
 			}
