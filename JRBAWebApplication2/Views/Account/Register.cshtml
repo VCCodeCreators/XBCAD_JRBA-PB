@@ -3,6 +3,8 @@
     ViewBag.Title = "Register";
 }
 
+
+
 <div style="width: 1440px; height: 900px; position: relative; background: white; box-shadow: 0px 3px 6px rgba(18, 15, 40, 0.12)">
     <div style="width: 538px; height: 591px; left: 835px; top: 188px; position: absolute; background: white; border-radius: 12px; overflow: hidden">
         <div style="left: 211px; top: 24px; position: absolute; color: #171A1F; font-size: 32px; font-family: Encode Sans; font-weight: 400; line-height: 48px; word-wrap: break-word">Sign up</div>
@@ -12,15 +14,17 @@
             @Html.AntiForgeryToken()
 
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 92px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
-                <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">First name</div>
-                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 133px; background: #F3F4F6; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
+                <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word; align-self: flex-start">First name</div>
+                <div style="align-self: flex-start; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 133px; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Input first name" })
                 </div>
             </div>
 
+
+
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 279px; top: 92px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">Last name</div>
-                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 135px; background: #F3F4F6; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
+                <div style="align-self: flex-start; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 135px; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Input last name" })
                 </div>
             </div>
