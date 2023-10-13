@@ -20,9 +20,9 @@ namespace JRBAWebApplication2.Models
 		public string CalculationName { get; set; }
 
 		public DateTime CalculationDate { get; set; }
-		public string Location { get; set; }
-		public string CropType { get; set; }
-		public double CropSize { get; set;}
+		public string BasinSelection { get; set; }
+		public string CropSelection { get; set; }
+		public double cropSize { get; set;}
 		public double DesiredYield { get; set;}
 		public double FinalCalc { get; set; }
 

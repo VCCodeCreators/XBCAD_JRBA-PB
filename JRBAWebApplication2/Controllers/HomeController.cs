@@ -8,84 +8,111 @@ using System.Web.Mvc;
 
 namespace JRBAWebApplication2.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
+		public ActionResult Index()
+		{
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Dashboard()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Estimations()
-        {
-			
-			int WaterDuty = 0;
-					var EstimationModel = new CalculationModels();
-            if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Komati/Lomati"))
-            {
-                 WaterDuty = 12000;
-            }
-			else if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Malkerns"))
-			{
-				 WaterDuty = 10880;
-			}
-			else if (EstimationModel.CropType.Equals( "Sugarcane") && EstimationModel.Location.Equals( "Usuthu/Other"))
-			{
-				 WaterDuty = 13650;
-			}
-			else if (EstimationModel.CropType.Equals( "Other"))
-			{
-				 WaterDuty = 8000;
-			}
-			//Water use estimation = water duty for crop (M^3/ha) x Area to be farmed (ha).
-			double estimate = WaterDuty * EstimationModel.CropSize;  
+		{
 			decimal estimatedAmountDouble = 4235.34m;
-            string estimatedAmount = "R"+ estimatedAmountDouble+" p/m";
+			string estimatedAmount = "R" + estimatedAmountDouble + " p/m";
 			ViewBag.EstimatedAmount = estimatedAmount;
 
 			return View();
-        }
+		}
 		//----------------------------------------------------------------------------------------------------\\
-		/*[HttpPost]
-		public ActionResult Estimations(CalculationModels model)
+		[HttpPost]
+		public ActionResult Estimations(CalculationModels model, FormCollection form)
 		{
-			if (ModelState.IsValid)
+			// Debugging code \\
+			System.Diagnostics.Debug.WriteLine("BasinSelection: " + model.BasinSelection);
+			System.Diagnostics.Debug.WriteLine("CropSelection: " + model.CropSelection);
+			System.Diagnostics.Debug.WriteLine("Form data: " + form);
+			try
 			{
-				// Perform the calculation and update the WaterUseEstimation property
-				//model.FinalCalc = model * model.AreaToFarm;
-			}
+				if (ModelState.IsValid)
+				{
 
+					model.BasinSelection = form.AllKeys.Contains("BasinSelection") ? form["BasinSelection"] : null;
+					model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
+					string basin = model.BasinSelection;
+					string crop = model.CropSelection;
+					double cropSize;
+					if (double.TryParse(form["cropSize"], out cropSize))
+					{
+						double WaterDuty = 0;
+
+						if (crop.Equals("Sugar Cane") && (basin.Equals("Komati") || basin.Equals("Lomati")))
+						{
+							WaterDuty = 12000;
+						}
+						else if (crop.Equals("Sugar Cane") && basin.Equals("Malkerns"))
+						{
+							WaterDuty = 10880;
+						}
+						else if (crop.Equals("Sugar Cane") && (basin.Equals("Usuthu") || basin.Equals("Other") || basin.Equals("Ngwavuma")))
+						{
+							WaterDuty = 13650;
+						}
+						else if (!string.IsNullOrEmpty(crop) && crop.Equals("other"))
+						{
+							WaterDuty = 8000;
+						}
+
+						// Calculate the estimate
+						double estimate = WaterDuty * cropSize;
+
+						// Store the estimate in the model
+						model.FinalCalc = estimate;
+
+						// Calculate the estimated amount as a formatted string
+						string estimatedAmount = "R" + estimate.ToString() + " p/m";
+						ViewBag.EstimatedAmount = estimatedAmount;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				//outputs exception to ViewBag
+				ViewBag.EstimatedAmount = ex;
+
+			}
 			// Return to the Estimations view with the updated model
 			return View("Estimations", model);
-		}*/
+		}
+
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Material()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Settings()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult UploadMaterial()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult DroughtView()
-        {
+		{
 			//DroughtView Outputs
 			ViewBag.PromoName = "";
 			ViewBag.StartDate = "";
@@ -95,30 +122,30 @@ namespace JRBAWebApplication2.Controllers
 
 
 			return View();
-        }
+		}
 		//----------------------------------------------------------------------------------------------------\\
 
 		public ActionResult Dash()
-        {
+		{
 			ViewBag.Name = "";
 			ViewBag.Comment = "";
-            return View();
-        }
+			return View();
+		}
 
 		//----------------------------------------------------------------------------------------------------\\
 		public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+		{
+			ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 		public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+		{
+			ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+			return View();
+		}
 		//----------------------------------------------------------------------------------------------------\\
 	}
 }

@@ -85,7 +85,7 @@ namespace JRBAWebApplication2.Models
 		[Display(Name = "UserRoles")]
 		public string UserRoles { get; set; }
 
-		[Required]
+		
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
