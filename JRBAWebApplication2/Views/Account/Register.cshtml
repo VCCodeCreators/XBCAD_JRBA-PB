@@ -16,7 +16,7 @@
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 92px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word; align-self: flex-start">First name</div>
                 <div style="align-self: flex-start; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 133px; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
-                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Input first name" })
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Input first name", Style = "background: #F3F4F6" })
                 </div>
             </div>
 
@@ -25,21 +25,23 @@
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 279px; top: 92px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">Last name</div>
                 <div style="align-self: flex-start; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 135px; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
-                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Input last name" })
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Input last name", style = "width:250px;height:40px;background: #F3F4F6" })
                 </div>
             </div>
 
+
+
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 171px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">Email</div>
-                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 327px; background: #F3F4F6; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example.email@gmail.com" })
+                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 327px; border-radius: 12px; justify-content: flex-start; align-items: center; display: inline-flex">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example.email@gmail.com", style = "width 400px; height:40px; background: #F3F4F6" })
                 </div>
             </div>
 
             <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 250px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">Password</div>
-                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 11px; background: #F3F4F6; border-radius: 12px; justify-content: center; align-items: center; gap: 296px; display: inline-flex">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter at least 8+ characters" })
+                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 0px; padding-right: 11px; border-radius: 12px; justify-content: center; align-items: center; gap: 296px; display: inline-flex">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter at least 8+ characters", style = "width 400px; height:40px; background: #F3F4F6" })
                     <div style="width: 16px; height: 16px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
                         <div style="width: 11.20px; height: 11.20px; border: 0.80px #171A1F solid"></div>
                         <div style="width: 12px; height: 8.80px; border: 0.80px #171A1F solid"></div>
@@ -49,10 +51,10 @@
                 </div>
             </div>
 
-            <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 290px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
+            <div style="height: 59px; padding-bottom: 1px; padding-right: 1px; left: 28px; top: 350px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: flex-start; gap: 1px; display: inline-flex">
                 <div style="color: #424856; font-size: 14px; font-family: Encode Sans; font-weight: 700; line-height: 22px; word-wrap: break-word">Confirm Password</div>
-                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 11px; background: #F3F4F6; border-radius: 12px; justify-content: center; align-items: center; gap: 296px; display: inline-flex">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Re-enter your password" })
+                <div style="align-self: stretch; height: 35px; padding-top: 7px; padding-bottom: 6px; padding-left: 12px; padding-right: 11px; border-radius: 12px; justify-content: center; align-items: center; gap: 296px; display: inline-flex">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Re-enter your password", style = "width 400px; height:40px; background: #F3F4F6" })
                     <div style="width: 16px; height: 16px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
                         <div style="width: 11.20px; height: 11.20px; border: 0.80px #171A1F solid"></div>
                         <div style="width: 12px; height: 8.80px; border: 0.80px #171A1F solid"></div>
@@ -63,14 +65,14 @@
             </div>
 
 
-            <div style="width: 482px; padding-top: 9px; padding-bottom: 9px; padding-left: 215px; padding-right: 222px; left: 28px; top: 371px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
-                <input type="submit" value="Sign up" class="btn btn-outline-dark" />
+            <div >
+                <input type="submit" value="Sign up" class="btn btn-outline-dark" style="width: 482px; padding-top: 9px; padding-bottom: 9px; padding-left: 215px; padding-right: 222px; left: 28px; top: 371px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex" />
             </div>
         }
 
         <div style="left: 166px; top: 435px; position: absolute; text-align: center">
             <span style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Already have an account? </span>
-            <span style="color: #025034; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Log in</span>
+            <a href="/Login"> <span style="color: #025034; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Log in</span> </a>
         </div>
 
         <div style="width: 36px; height: 20px; left: 28px; top: 330px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
