@@ -4888,6 +4888,9 @@ body {
   border-bottom-right-radius: var(--bs-pagination-border-radius);
 }
 
+
+    
+
 .pagination-lg {
   --bs-pagination-padding-x: 1.5rem;
   --bs-pagination-padding-y: 0.75rem;
