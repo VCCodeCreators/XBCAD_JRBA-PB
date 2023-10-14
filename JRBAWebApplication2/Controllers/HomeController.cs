@@ -70,7 +70,7 @@ namespace JRBAWebApplication2.Controllers
 							WaterDuty = 8000;
 						}
 
-						System.Diagnostics.Debug.WriteLine("Form data: " + WaterDuty);
+						//System.Diagnostics.Debug.WriteLine("water data: " + WaterDuty);
 
 						// Calculate the estimate
 						double estimate = WaterDuty * cropSize;
@@ -122,7 +122,7 @@ namespace JRBAWebApplication2.Controllers
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		[Authorize(Roles = "Admin")]
 		public ActionResult UploadMaterial()
 		{
 			return View();
