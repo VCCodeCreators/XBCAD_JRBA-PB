@@ -35,9 +35,9 @@ namespace JRBAWebApplication2.Controllers
 		public ActionResult Estimations(CalculationModels model, FormCollection form)
 		{
 			// Debugging code \\
-			System.Diagnostics.Debug.WriteLine("BasinSelection: " + model.BasinSelection);
-			System.Diagnostics.Debug.WriteLine("CropSelection: " + model.CropSelection);
-			System.Diagnostics.Debug.WriteLine("Form data: " + form);
+			//System.Diagnostics.Debug.WriteLine("BasinSelection: " + model.BasinSelection);
+			//System.Diagnostics.Debug.WriteLine("CropSelection: " + model.CropSelection);
+			//System.Diagnostics.Debug.WriteLine("Form data: " + form);
 			try
 			{
 				if (ModelState.IsValid)
@@ -47,8 +47,9 @@ namespace JRBAWebApplication2.Controllers
 					model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
 					string basin = model.BasinSelection;
 					string crop = model.CropSelection;
-					double cropSize;
-					if (double.TryParse(form["cropSize"], out cropSize))
+					double cropSize = model.cropSize;
+					string estimatedAmount = "";
+					if (double.TryParse(form["cropSize"], out cropSize) && !cropSize.Equals(null))
 					{
 						double WaterDuty = 0;
 
@@ -64,20 +65,37 @@ namespace JRBAWebApplication2.Controllers
 						{
 							WaterDuty = 13650;
 						}
-						else if (!string.IsNullOrEmpty(crop) && crop.Equals("other"))
+						else if (!string.IsNullOrEmpty(crop) || crop.Equals("other"))
 						{
 							WaterDuty = 8000;
 						}
 
+						System.Diagnostics.Debug.WriteLine("Form data: " + WaterDuty);
+
 						// Calculate the estimate
 						double estimate = WaterDuty * cropSize;
-
+						estimatedAmount = "R" + estimate.ToString() + " p/m";
 						// Store the estimate in the model
 						model.FinalCalc = estimate;
 
+						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.Equals(0) || cropSize.Equals(null))
+						{
+							// Handle the case where required fields are empty
+							estimatedAmount = "Error";
+
+						}
+
+
 						// Calculate the estimated amount as a formatted string
-						string estimatedAmount = "R" + estimate.ToString() + " p/m";
+						//string estimatedAmount = "R" + estimate.ToString() + " p/m";
 						ViewBag.EstimatedAmount = estimatedAmount;
+					}
+					else
+					{
+						estimatedAmount = "Error";
+						ViewBag.EstimatedAmount = estimatedAmount;
+
+
 					}
 				}
 			}
