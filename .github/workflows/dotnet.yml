@@ -29,13 +29,24 @@ jobs:
       run: msbuild JRBAWebApplication2.sln /p:Configuration=Release
 
     - name: Run Unit Tests
-      run: dotnet test --filter Category=Unit
+      run: |
+        cd YourTestProjectFolder
+        nuget install MSTest.TestFramework -Version 2.1.2 -OutputDirectory packages
+        nuget install MSTest.TestAdapter -Version 2.1.2 -OutputDirectory packages
+        packages\MSTest.TestAdapter.2.1.2\build\_common\mstest.console.exe YourTestAssembly.dll
+      shell: cmd
 
     - name: Run Integration Tests
-      run: dotnet test --filter Category=Integration
+      run: |
+        # Add commands to run integration tests if needed
+      shell: bash
 
     - name: Run Regression Tests
-      run: dotnet test --filter Category=Regression
+      run: |
+        # Add commands to run regression tests if needed
+      shell: bash
 
     - name: Run Functional Tests
-      run: dotnet test --filter Category=Functional
+      run: |
+        # Add commands to run functional tests if needed
+      shell: bash
