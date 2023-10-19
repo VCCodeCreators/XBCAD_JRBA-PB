@@ -1,6 +1,5 @@
 ﻿using JRBAWebApplication2.Models;
 using Microsoft.Ajax.Utilities;
-using Microsoft.Build.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,18 +13,28 @@ namespace JRBAWebApplication2.Controllers
 {
 	public class HomeController : Controller
 	{
+		/// <summary>
+		/// Index View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Index()
 		{
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Board View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Dashboard()
 		{
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Estimations View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Estimations()
 		{
 			const decimal estimatedAmountDouble = 4235.34m;
@@ -35,8 +44,12 @@ namespace JRBAWebApplication2.Controllers
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-		
-
+		/// <summary>
+		/// Estimations page POST View
+		/// </summary>
+		/// <param name="model"></param>
+		/// <param name="form"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public ActionResult Estimations(CalculationModels model, FormCollection form)
 		{
@@ -85,6 +98,7 @@ namespace JRBAWebApplication2.Controllers
 						// Store the estimate in the model
 						model.FinalCalc = estimate;
 
+						//cropSize can't be negative number
 						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.ToString().IsNullOrWhiteSpace() || cropSize <=0)
 						{
 							// Handle the case where required fields are empty
@@ -117,25 +131,38 @@ namespace JRBAWebApplication2.Controllers
 		}
 
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Material Page View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Material()
 		{
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Settings page View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Settings()
 		{
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// UploadMaterial View
+		/// </summary>
+		/// <returns></returns>
 		[Authorize(Roles = "Admin")]
 		public ActionResult UploadMaterial()
 		{
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Drought information page view
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult DroughtView()
 		{
 			//DroughtView Outputs
@@ -149,7 +176,10 @@ namespace JRBAWebApplication2.Controllers
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
-
+		/// <summary>
+		/// Dashboard View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Dash()
 		{
 			ViewBag.Name = "";
@@ -158,6 +188,10 @@ namespace JRBAWebApplication2.Controllers
 		}
 
 		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// About Page View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
@@ -165,6 +199,10 @@ namespace JRBAWebApplication2.Controllers
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// Contacts Page View
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";
