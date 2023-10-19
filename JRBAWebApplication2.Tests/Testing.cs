@@ -3,70 +3,108 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Web.Mvc;
 
-
 namespace JRBAWebApplication2.Tests
 {
-	[TestClass]
-	public class Testing
-	{
-		[TestMethod]
-		[TestCategory("Unit")]
-		public void EstimationsUnitTest()
-		{
-			// Arrange
-			HomeController controller = new HomeController();
+    [TestClass]
+    public class Testing
+    {
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void EstimationsUnitTest()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
 
-			// Act
-			ViewResult result = controller.Estimations() as ViewResult;
+            // Act
+            ActionResult result = controller.Estimations() as ViewResult;
 
-			// Assert
-			Assert.IsNotNull(result);
-		}
-		//-------------------------------------------------------------------------------------------------------------------\\
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void EstimationsPostTest_ValidData()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+            CalculationModels model = new CalculationModels();
+            FormCollection form = new FormCollection
+            {
+                { "BasinSelection", "Komati" },
+                { "CropSelection", "Sugar Cane" },
+                { "cropSize", "100" }
+            };
 
-		[TestMethod]
-		[TestCategory("Integration")]
-		public void MyIntegrationTest()
-		{
-			// Integration test code here
-			// Arrange
-			HomeController controller = new HomeController();
+            // Act
+            ActionResult result = controller.Estimations();//model,form
 
-			// Act: Simulate an interaction between components
-			ViewResult result = controller.Estimations() as ViewResult;
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var viewResult = (ViewResult)result;
+            Assert.AreEqual("R1200000 p/m", viewResult.ViewBag.EstimatedAmount);
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void EstimationsPostTest_InvalidData()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+            CalculationModels model = new CalculationModels();
+            FormCollection form = new FormCollection
+            {
+                { "BasinSelection", "InvalidBasin" },
+                { "CropSelection", "InvalidCrop" },
+                { "cropSize", "invalid" }
+            };
 
-			// Assert: Verify the result or behavior
-			Assert.IsNotNull(result);
-		}
-		//-------------------------------------------------------------------------------------------------------------------\\
+            // Act
+            ActionResult result = controller.Estimations();//mode;, form
 
-		[TestMethod]
-		[TestCategory("Regression")]
-		public void MyRegressionTest()
-		{
-			// Arrange: Prepare data and an existing function
-			int a = 5;
-			int b = 7;
-			HomeController controller = new HomeController();
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var viewResult = (ViewResult)result;
+            Assert.AreEqual(" Error: Invalid Input", viewResult.ViewBag.EstimatedAmount);
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void MyIntegrationTest()
+        {
+	        // Arrange: Set up any necessary dependencies, data, or conditions for the test
+	        HomeController controller = new HomeController();
 
-			// Act: Call the existing function
-			//int result = controller.Estimations.Add(a, b);
+	        // Act: Simulate an interaction between components
+	        ViewResult result = controller.Estimations() as ViewResult;
 
-			// Assert: Verify the result
-		//	Assert.AreEqual(12, result);
-			// Regression test code here
-		}
-		//-------------------------------------------------------------------------------------------------------------------\\
-
-		[TestMethod]
-		[TestCategory("Functional")]
-		public void MyFunctionalTest()
-		{
-			// Functional test code here
-		}
-		//-------------------------------------------------------------------------------------------------------------------\\
-
-	}
+	        // Assert: Verify the result or behavior
+	        Assert.IsNotNull(result);
+	        // Add more assertions as needed to check specific behavior
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        [TestMethod]
+        [TestCategory("Regression")]
+        public void MyRegressionTest()
+        {
+            // This test method seems incomplete, and the code is commented out.
+            
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        [TestMethod]
+        [TestCategory("Functional")]
+        public void MyFunctionalTest()
+        {
+            // This is where you would write functional test code.
+            
+        }
+        //------------------------------------------------------------------------------------------------------------------\\
+        class CalculationModels
+        {
+            // If CalculationModels is a class used in your code, you can define it here.
+        }
+    }
 }
-//-----------------------------------------------------------End of File--------------------------------------------------------------\\
-
