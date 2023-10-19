@@ -1,10 +1,14 @@
 ﻿using JRBAWebApplication2.Models;
 using Microsoft.Ajax.Utilities;
+using Microsoft.Build.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
+
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -24,13 +28,15 @@ namespace JRBAWebApplication2.Controllers
 
 		public ActionResult Estimations()
 		{
-			decimal estimatedAmountDouble = 4235.34m;
+			const decimal estimatedAmountDouble = 4235.34m;
 			string estimatedAmount = "R" + estimatedAmountDouble + " p/m";
 			ViewBag.EstimatedAmount = estimatedAmount;
 
 			return View();
 		}
 		//----------------------------------------------------------------------------------------------------\\
+		
+
 		[HttpPost]
 		public ActionResult Estimations(CalculationModels model, FormCollection form)
 		{
@@ -42,14 +48,15 @@ namespace JRBAWebApplication2.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-
+					
 					model.BasinSelection = form.AllKeys.Contains("BasinSelection") ? form["BasinSelection"] : null;
 					model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
+					//model.cropSize = Convert.ToDouble(form.AllKeys.Contains("cropSize") ? form["cropSize"] : null);
 					string basin = model.BasinSelection;
 					string crop = model.CropSelection;
 					double cropSize = model.cropSize;
 					string estimatedAmount = "";
-					if (double.TryParse(form["cropSize"], out cropSize) && !cropSize.Equals(null))
+					if (double.TryParse(form["cropSize"], out cropSize) && !cropSize.ToString().IsNullOrWhiteSpace()) 
 					{
 						double WaterDuty = 0;
 
@@ -78,10 +85,10 @@ namespace JRBAWebApplication2.Controllers
 						// Store the estimate in the model
 						model.FinalCalc = estimate;
 
-						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.Equals(0) || cropSize.Equals(null))
+						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.ToString().IsNullOrWhiteSpace() || cropSize <=0)
 						{
 							// Handle the case where required fields are empty
-							estimatedAmount = "Error";
+							estimatedAmount = " Error: Invalid Input";
 
 						}
 
@@ -92,7 +99,7 @@ namespace JRBAWebApplication2.Controllers
 					}
 					else
 					{
-						estimatedAmount = "Error";
+						estimatedAmount = " Error: Invalid Input";
 						ViewBag.EstimatedAmount = estimatedAmount;
 
 
@@ -102,7 +109,7 @@ namespace JRBAWebApplication2.Controllers
 			catch (Exception ex)
 			{
 				//outputs exception to ViewBag
-				ViewBag.EstimatedAmount = ex;
+				ViewBag.EstimatedAmount = ex.ToString();
 
 			}
 			// Return to the Estimations view with the updated model
