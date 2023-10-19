@@ -10,21 +10,21 @@ namespace JRBAWebApplication2.Models
         [EmailAddress(ErrorMessage = "Invalid email address format")]
         public string Email { get; set; }
     }
-
-    public class ExternalLoginListViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
     }
-
-    public class SendCodeViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
-
-    public class VerifyCodeViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class VerifyCodeViewModel
     {
         [Required]
         public string Provider { get; set; }
@@ -39,16 +39,16 @@ namespace JRBAWebApplication2.Models
 
         public bool RememberMe { get; set; }
     }
-
-    public class ForgotViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class ForgotViewModel
     {
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email address is required")]
         [EmailAddress(ErrorMessage = "Invalid email address format")]
         public string Email { get; set; }
     }
-
-    public class LoginViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class LoginViewModel
     {
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email address is required")]
@@ -81,6 +81,11 @@ namespace JRBAWebApplication2.Models
         [EmailAddress(ErrorMessage = "Invalid email address format")]
         public string Email { get; set; }
 
+		//[Required]
+		[Display(Name = "UserRoles")]
+		public string UserRoles { get; set; }
+
+		
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -92,9 +97,8 @@ namespace JRBAWebApplication2.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
-
-    public class ResetPasswordViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class ResetPasswordViewModel
     {
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email address is required")]
@@ -114,8 +118,8 @@ namespace JRBAWebApplication2.Models
 
         public string Code { get; set; }
     }
-
-    public class ForgotPasswordViewModel
+	//----------------------------------------------------------------------------------------------------\\
+	public class ForgotPasswordViewModel
     {
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email address is required")]
@@ -123,3 +127,4 @@ namespace JRBAWebApplication2.Models
         public string Email { get; set; }
     }
 }
+//------------------------------------------------End of File----------------------------------------------------\\
