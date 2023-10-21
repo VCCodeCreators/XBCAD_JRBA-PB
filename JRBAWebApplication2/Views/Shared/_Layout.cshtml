@@ -9,46 +9,99 @@
 
 
     </head>
-    <body>
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-top">
-            <div class="container">
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <!-- Remove list items with links -->
-                    </ul>
-                    <div class="ml-auto">
-                        <!-- This div aligns content to the right -->
-                        @Html.Partial("_LoginPartial")
-                    </div>
+<body>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-top">
+        <div class="container">
+            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <!-- Remove list items with links -->
+                </ul>
+                <div class="ml-auto">
+                    <!-- This div aligns content to the right -->
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
-        </nav>
-
-        <!-- Sidebar -->
-        <div class="sidebar" style="background-color: #FAFAFBFF;">
-            <img style="width: 188px; height: 106px; border-radius: 12px" src="https://via.placeholder.com/188x106" />
-            <a href="~/Home/Dash"><i class="bi bi-house-door-fill"></i><span>Home</span></a>
-            <a href="~/Home/About"><i class="bi bi-plus-square-fill"></i><span>About</span></a>
-            <a href="~/Home/Contact"><i class="bi bi-list-nested"></i><span>Contact</span></a>
         </div>
+    </nav>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
+    <style>
+        /* Add this style block in your HTML file */
+        .sidebar a {
+            transition: all 0.3s ease-in-out;
+        }
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+            .sidebar a:hover {
+                background-color: #E9ECEF;
+                transform: scale(1.05);
+            }
+
+            .sidebar a.selected {
+                background-color: #218838;
+                color: #FFFFFF;
+                transform: scale(1.05);
+            }
+
+                .sidebar a.selected i {
+                    color: #FFFFFF;
+                }
+    </style>
+
+    <!-- Improved Sidebar -->
+    <div class="sidebar" style="background-color: #F8F9FA;">
+        <img style="width: 100%; max-width: 188px; height: auto; border-radius: 12px; margin-bottom: 16px;" src="~/Images/JRBA-LOGO.png" alt="Logo" />
+        <a href="~/Home/Dashboard" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px;margin-top:30px; font-size: 0.9em;">
+            <i class="bi bi-house-door-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
+            Dashboard
+        </a>
+        <a href="~/Home/Estimations" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em;">
+            <i class="bi bi-plus-square-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
+            Calculate
+        </a>
+        <a href="~/Home/Material" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em;">
+            <i class="bi bi-list-nested" style="font-size: 1.2em; margin-right: 8px;"></i>
+            Educational Material
+        </a>
+
+        <a href="~/Home/Settings" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 16px; margin-top: 380px; font-size: 0.9em;">
+            <i class="bi bi-list-nested" style="font-size: 1.2em; margin-right: 8px;"></i>
+            settings
+        </a>
+        <a href="" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 16px; font-size: 0.9em;">
+            <i class="bi bi-plus-square-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
+            Logout
+        </a>
+    </div>
+
+    <script>
+        // Add this script block at the end of your HTML body
+        document.querySelectorAll('.sidebar a').forEach(function (item) {
+            item.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar a').forEach(function (link) {
+                    link.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+    </script>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - JRBA-PB web app</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

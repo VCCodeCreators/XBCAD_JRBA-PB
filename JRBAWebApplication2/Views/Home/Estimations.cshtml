@@ -1,150 +1,116 @@
-﻿
+﻿@using JRBAWebApplication2.Models
 @{
     ViewBag.Title = "Estimations";
 }
 
 <h2>Estimations</h2>
+@using (Html.BeginForm("Estimations", "Home", FormMethod.Post))
+{
+    <div style="width: 979px; height: 793px; position: relative; background: white ">
+        <div style="width: 439px; height: 696px; left: 494px; top: 37px; position: absolute; background: #F3F4F6; box-shadow: 0px 0px 1px rgba(23, 26, 31, 0.15); border-radius: 12px">
 
-<div style="width: 979px; height: 793px; position: relative; background: white; box-shadow: 0px 3px 6px rgba(18, 15, 40, 0.12)">
-    <div style="width: 439px; height: 696px; left: 494px; top: 37px; position: absolute; background: #F3F4F6; box-shadow: 0px 0px 1px rgba(23, 26, 31, 0.15); border-radius: 12px">
-        <div style="padding-top: 9px; padding-bottom: 9px; padding-left: 16px; padding-right: 40px; left: 22.69px; top: 451px; position: absolute; background: #DE3B40; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Delete selected estimates</div>
-        </div>
-        <div style="padding-top: 5px; padding-bottom: 5px; padding-left: 8px; padding-right: 11px; left: 337px; top: 222px; position: absolute; background: white; border-radius: 9px; overflow: hidden; border: 1px #025034 solid; justify-content: center; align-items: center; gap: 4px; display: inline-flex">
-            <div style="width: 12px; height: 12px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 9.43px; height: 6.86px; border: 0.86px #025034 solid"></div>
-                <div style="width: 3.43px; height: 3.43px; border: 0.86px #025034 solid"></div>
+
+            <button style="padding-top: 9px; padding-bottom: 9px; padding-left: 16px; padding-right: 40px; left: 22.69px; top: 451px; position: absolute; background: #DE3B40; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex; color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Delete selected estimates</button>
+
+            <div style="left: 22.69px; top: 24px; position: absolute; color: #171A1F; font-size: 28px; font-family: Epilogue; font-weight: 700; line-height: 42px; word-wrap: break-word">Previous Estimations</div>
+            <div style="left: 22.69px; top: 80.50px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">View your previous estimates here</div>
+            <div style="left: 22px; top: 527px; position: absolute; color: #171A1F; font-size: 20px; font-family: Epilogue; font-weight: 700; line-height: 30px; word-wrap: break-word">Data Backups</div>
+            <div style="left: 22.69px; top: 163.50px; position: absolute; color: #171A1F; font-size: 20px; font-family: Epilogue; font-weight: 700; line-height: 30px; word-wrap: break-word">Security</div>
+            <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <table style="margin: auto;">
+                    <tr>
+                        <th>Site name</th>
+                        <th>Basin</th>
+                        <th>Crop</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                    </tr>
+                </table>
             </div>
-            <div style="color: #025034; font-size: 11px; font-family: Encode Sans; font-weight: 400; line-height: 18px; word-wrap: break-word">View</div>
-        </div>
-        <div style="left: 22.69px; top: 24px; position: absolute; color: #171A1F; font-size: 28px; font-family: Epilogue; font-weight: 700; line-height: 42px; word-wrap: break-word">Previous Estimations</div>
-        <div style="left: 22.69px; top: 80.50px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">View your previous estimates here</div>
-        <div style="left: 22px; top: 527px; position: absolute; color: #171A1F; font-size: 20px; font-family: Epilogue; font-weight: 700; line-height: 30px; word-wrap: break-word">Data Backups</div>
-        <div style="left: 22.69px; top: 163.50px; position: absolute; color: #171A1F; font-size: 20px; font-family: Epilogue; font-weight: 700; line-height: 30px; word-wrap: break-word">Security</div>
-        <div style="width: 197px; height: 178px; left: 23px; top: 222px; position: absolute">
-            <div style="width: 197px; height: 22px; left: 0px; top: 0px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Komati sugarcane 12 hectors</div>
-                <div style="width: 16px; height: 16px; background: #025034; border-radius: 4px"></div>
-                <div style="width: 12px; height: 12px; position: relative">
-                    <div style="width: 8.40px; height: 5.70px; left: 1.80px; top: 3px; position: absolute; border: 0.72px #E9FEF7 solid"></div>
+
+            <div style="width: 372px; height: 100px; left: 22px; top: 572px; position: absolute">
+
+                <div style="width: 372px; height: 22px; left: 0px; top: 0px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: center; align-items: center; gap: 6px; display: inline-flex">
+                    <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Encrypt Backup</div>
+                    <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #6F7787 solid; cursor: pointer;" onclick="this.style.background = (this.style.background === 'green' ? 'white' : 'green')"></div>
+                </div>
+
+                <div style="width: 372px; height: 22px; left: 0px; top: 39px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: center; align-items: center; gap: 6px; display: inline-flex">
+                    <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Create duplicates</div>
+                    <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #6F7787 solid; cursor: pointer;" onclick="this.style.background = (this.style.background === 'green' ? 'white' : 'green')"></div>
+                </div>
+
+                <div style="width: 372px; height: 22px; left: 0px; top: 78px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: center; align-items: center; gap: 6px; display: inline-flex">
+                    <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Auto backup</div>
+                    <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #6F7787 solid; cursor: pointer;" onclick="this.style.background = (this.style.background === 'green' ? 'white' : 'green')"></div>
                 </div>
             </div>
-            <div style="width: 197px; height: 22px; padding-right: 36px; left: 0px; top: 39px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-                <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #565D6D solid"></div>
-                <div style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Ngwavuma Industrial 300</div>
-            </div>
-            <div style="width: 197px; height: 22px; padding-right: 28px; left: 0px; top: 78px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-                <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #565D6D solid"></div>
-                <div style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Usuthu Bannana 24 hectors</div>
-            </div>
-            <div style="width: 197px; height: 22px; left: 0px; top: 117px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Lomati Maze 11 hectors</div>
-                <div style="width: 16px; height: 16px; background: #025034; border-radius: 4px"></div>
-                <div style="width: 12px; height: 12px; position: relative">
-                    <div style="width: 8.40px; height: 5.70px; left: 1.80px; top: 3px; position: absolute; border: 0.72px #E9FEF7 solid"></div>
-                </div>
-            </div>
-            <div style="width: 197px; height: 22px; padding-right: 26px; left: 0px; top: 156px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-                <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #565D6D solid"></div>
-                <div style="color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Komati sugarcane 11 hectors</div>
-            </div>
         </div>
-        <div style="padding-top: 5px; padding-bottom: 5px; padding-left: 8px; padding-right: 11px; left: 337px; top: 259px; position: absolute; background: white; border-radius: 9px; overflow: hidden; border: 1px #025034 solid; justify-content: center; align-items: center; gap: 4px; display: inline-flex">
-            <div style="width: 12px; height: 12px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 9.43px; height: 6.86px; border: 0.86px #025034 solid"></div>
-                <div style="width: 3.43px; height: 3.43px; border: 0.86px #025034 solid"></div>
-            </div>
-            <div style="color: #025034; font-size: 11px; font-family: Encode Sans; font-weight: 400; line-height: 18px; word-wrap: break-word">View</div>
+        <div style="width: 44.50px; height: 25px; left: 399px; top: 668px; position: absolute">
+            <div style="width: 44px; height: 14.40px; left: 0.50px; top: 5.30px; position: absolute; background: #BDC1CA; border-radius: 7.20px"></div>
+            <div style="width: 25px; height: 25px; left: 0px; top: 0px; position: absolute; background: #9095A1; border-radius: 9999px"></div>
         </div>
-        <div style="padding-top: 5px; padding-bottom: 5px; padding-left: 8px; padding-right: 11px; left: 337px; top: 297px; position: absolute; background: white; border-radius: 9px; overflow: hidden; border: 1px #025034 solid; justify-content: center; align-items: center; gap: 4px; display: inline-flex">
-            <div style="width: 12px; height: 12px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 9.43px; height: 6.86px; border: 0.86px #025034 solid"></div>
-                <div style="width: 3.43px; height: 3.43px; border: 0.86px #025034 solid"></div>
-            </div>
-            <div style="color: #025034; font-size: 11px; font-family: Encode Sans; font-weight: 400; line-height: 18px; word-wrap: break-word">View</div>
+        <div style="width: 44.50px; height: 25px; left: 399px; top: 628px; position: absolute">
+            <div style="width: 44px; height: 14.40px; left: 0px; top: 5.30px; position: absolute; background: #86FCD1; border-radius: 7.20px"></div>
+            <div style="width: 25px; height: 25px; left: 19.50px; top: 0px; position: absolute; background: #025034; border-radius: 9999px"></div>
         </div>
-        <div style="padding-top: 5px; padding-bottom: 5px; padding-left: 8px; padding-right: 11px; left: 337px; top: 334px; position: absolute; background: white; border-radius: 9px; overflow: hidden; border: 1px #025034 solid; justify-content: center; align-items: center; gap: 4px; display: inline-flex">
-            <div style="width: 12px; height: 12px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 9.43px; height: 6.86px; border: 0.86px #025034 solid"></div>
-                <div style="width: 3.43px; height: 3.43px; border: 0.86px #025034 solid"></div>
-            </div>
-            <div style="color: #025034; font-size: 11px; font-family: Encode Sans; font-weight: 400; line-height: 18px; word-wrap: break-word">View</div>
+
+
+        <button style="width: 163px; height: 45px; padding-top: 9px; padding-bottom: 9px; padding-left: 65px; padding-right: 69px; left: 58px; top: 726px; position: absolute; background: #187FBF; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex; border: none;">
+            <div style="color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Save</div>
+        </button>
+
+        <button type="submit"  style="width: 163px;  padding-top: 9px; padding-bottom: 9px; padding-left: 50px; padding-right: 58px; left: 155px; top: 484px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex; color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Calculate</button>
+
+        <div style="margin-top: 10px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 58px; top: 302px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 322px; display: inline-flex">
+            <select name="CropSelection" style="background: rgba(0,0,0,0); border: none; color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; margin: 0; padding: 0;">
+                <option value="Crop">Crop</option>
+                <option value="Sugar Cane">Sugar Cane</option>
+                <option value="other">Other</option>
+            </select>
         </div>
-        <div style="padding-top: 5px; padding-bottom: 5px; padding-left: 8px; padding-right: 11px; left: 337px; top: 374px; position: absolute; background: white; border-radius: 9px; overflow: hidden; border: 1px #025034 solid; justify-content: center; align-items: center; gap: 4px; display: inline-flex">
-            <div style="width: 12px; height: 12px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                <div style="width: 9.43px; height: 6.86px; border: 0.86px #025034 solid"></div>
-                <div style="width: 3.43px; height: 3.43px; border: 0.86px #025034 solid"></div>
-            </div>
-            <div style="color: #025034; font-size: 11px; font-family: Encode Sans; font-weight: 400; line-height: 18px; word-wrap: break-word">View</div>
+
+        <div style="width: 401px; padding: 9px 16px 8px 16px; position: absolute; left: 58px; top: 417px; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; display: flex;">
+            <input type="text" style="color: #171A1F; width: 100%; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; border: none; background: transparent; outline: none;" placeholder="Purpose">
         </div>
-        <div style="width: 372px; height: 100px; left: 22px; top: 572px; position: absolute">
-            <div style="width: 372px; height: 22px; left: 0px; top: 0px; position: absolute; background: rgba(0, 0, 0, 0); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Encrypt Backup</div>
-                <div style="width: 16px; height: 16px; background: #025034; border-radius: 4px"></div>
-                <div style="width: 12px; height: 12px; position: relative">
-                    <div style="width: 8.40px; height: 5.70px; left: 1.80px; top: 3px; position: absolute; border: 0.72px #E9FEF7 solid"></div>
-                </div>
-            </div>
-            <div style="width: 372px; height: 22px; left: 0px; top: 39px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: center; align-items: center; gap: 6px; display: inline-flex">
-                <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Create duplicates</div>
-                <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #6F7787 solid"></div>
-            </div>
-            <div style="width: 372px; height: 22px; left: 0px; top: 78px; position: absolute; background: rgba(0, 0, 0, 0); justify-content: center; align-items: center; gap: 6px; display: inline-flex">
-                <div style="width: 350px; color: #171A1F; font-size: 14px; font-family: Encode Sans; font-weight: 400; line-height: 22px; word-wrap: break-word">Auto backup</div>
-                <div style="width: 16px; height: 16px; background: white; border-radius: 4px; border: 1px #6F7787 solid"></div>
-            </div>
+
+        <div style="padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 283px; top: 243px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 89px; display: inline-flex">
+            <select name="BasinSelection" style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word; border: none; background-color: white; -webkit-appearance: none;">
+                <option selected value="basin">Basin</option>
+                <option value="Komati">Komati</option>
+                <option value="Lomati">Lomati</option>
+                <option value="Ngwavuma">Ngwavuma</option>
+                <option value="Usuthu">Usuthu</option>
+                <option value="Malkerns">Malkerns</option>
+            </select>
         </div>
-    </div>
-    <div style="width: 44.50px; height: 25px; left: 399px; top: 668px; position: absolute">
-        <div style="width: 44px; height: 14.40px; left: 0.50px; top: 5.30px; position: absolute; background: #BDC1CA; border-radius: 7.20px"></div>
-        <div style="width: 25px; height: 25px; left: 0px; top: 0px; position: absolute; background: #9095A1; border-radius: 9999px"></div>
-    </div>
-    <div style="width: 44.50px; height: 25px; left: 399px; top: 628px; position: absolute">
-        <div style="width: 44px; height: 14.40px; left: 0px; top: 5.30px; position: absolute; background: #86FCD1; border-radius: 7.20px"></div>
-        <div style="width: 25px; height: 25px; left: 19.50px; top: 0px; position: absolute; background: #025034; border-radius: 9999px"></div>
-    </div>
-    <div style="width: 163px; padding-top: 9px; padding-bottom: 9px; padding-left: 65px; padding-right: 69px; left: 58px; top: 726px; position: absolute; background: #187FBF; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Save</div>
-    </div>
-    <div style="width: 163px; padding-top: 9px; padding-bottom: 9px; padding-left: 50px; padding-right: 58px; left: 155px; top: 484px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Calculate</div>
-    </div>
-    <div style="padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 58px; top: 302px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 322px; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Crop</div>
-        <div style="width: 20px; height: 20px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="width: 9px; height: 4.50px; border: 1px #171A1F solid"></div>
+
+        <div style="width: 211px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 132px; left: 58px; top: 241px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: flex-start; align-items: center; display: inline-flex">
+            <input type="text" style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word; width:100%; border:none; background-color:transparent;" placeholder="Site Name"></input>
         </div>
-    </div>
-    <div style="width: 401px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 335px; left: 58px; top: 417px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Purpose</div>
-    </div>
-    <div style="padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 283px; top: 243px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 89px; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Basin</div>
-        <div style="width: 20px; height: 20px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="width: 9px; height: 4.50px; border: 1px #171A1F solid"></div>
+
+        <button style="width: 163px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 108px; left: 237px; top: 726px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Cancel</div>
+        </button>
+
+        <div style="padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 106px; top: 363px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 113px; display: inline-flex">
+            <input name="cropSize" type="number" placeholder="138" style="color: #171A1F; font-size: 16px; border:none; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">
         </div>
+        
+        <div style="left: 138px; top: 547px; position: absolute; color: #171A1F; font-size: 30px; font-family: Epilogue; font-weight: 700; line-height: 46px; word-wrap: break-word">@ViewBag.EstimatedAmount</div>
+
+        <div style="left: 46px; top: 669px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit application form</div>
+        <div style="left: 58px; top: 57px; position: absolute; color: #171A1F; font-size: 28px; font-family: Epilogue; font-weight: 700; line-height: 42px; word-wrap: break-word">Estimations</div>
+        <div style="left: 46px; top: 629px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit Info sheet</div>
+        <div style="left: 58px; top: 114px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Fill down your info.</div>
+        <div style="left: 58px; top: 192px; position: absolute; color: #171A1F; font-size: 22px; font-family: Epilogue; font-weight: 700; line-height: 34px; word-wrap: break-word">Site Info</div>
+        <div style="left: 58px; top: 371px; position: absolute; color: #171A1F; font-size: 18px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">Size:</div>
     </div>
-    <div style="width: 211px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 132px; left: 58px; top: 241px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Site Name</div>
-    </div>
-    <div style="width: 163px; padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 108px; left: 237px; top: 726px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Cancel</div>
-    </div>
-    <div style="padding-top: 9px; padding-bottom: 8px; padding-left: 16px; padding-right: 15px; left: 106px; top: 363px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; border: 1px #9095A1 solid; justify-content: center; align-items: center; gap: 113px; display: inline-flex">
-        <div style="color: #171A1F; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">138</div>
-        <div style="width: 20px; height: 20px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="width: 7px; height: 4px; border: 1px #171A1F solid"></div>
-            <div style="width: 15px; height: 9px; border: 1px #171A1F solid"></div>
-            <div style="width: 0px; height: 3px; border: 1px #171A1F solid"></div>
-            <div style="width: 0px; height: 3px; border: 1px #171A1F solid"></div>
-            <div style="width: 0px; height: 3px; border: 1px #171A1F solid"></div>
-        </div>
-    </div>
-    <div style="left: 138px; top: 547px; position: absolute; color: #171A1F; font-size: 30px; font-family: Epilogue; font-weight: 700; line-height: 46px; word-wrap: break-word">R 4235,34 p/m</div>
-    <div style="left: 46px; top: 669px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit application form</div>
-    <div style="left: 58px; top: 57px; position: absolute; color: #171A1F; font-size: 28px; font-family: Epilogue; font-weight: 700; line-height: 42px; word-wrap: break-word">Estimations</div>
-    <div style="left: 46px; top: 629px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Download Permit Info sheet</div>
-    <div style="left: 58px; top: 114px; position: absolute; color: #171A1F; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">Fill down your info.</div>
-    <div style="left: 58px; top: 192px; position: absolute; color: #171A1F; font-size: 22px; font-family: Epilogue; font-weight: 700; line-height: 34px; word-wrap: break-word">Site Info</div>
-    <div style="left: 58px; top: 371px; position: absolute; color: #171A1F; font-size: 18px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word">Size:</div>
-</div>
+}
