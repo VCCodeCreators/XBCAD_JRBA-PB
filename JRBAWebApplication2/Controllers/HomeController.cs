@@ -2,12 +2,15 @@
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text.RegularExpressions;
-
+using System.Threading.Tasks;
+using Azure.Storage.Blobs;
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -158,6 +161,44 @@ namespace JRBAWebApplication2.Controllers
 		{
 			return View();
 		}
+		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// Upload Material POST
+		/// </summary>
+		/// <param name="file"></param>
+		/// <returns></returns>
+		[HttpPost]
+		public async Task<ActionResult> UploadMaterial(HttpPostedFileBase file)
+		{
+			
+			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+			try
+			{
+				if (file != null && file.ContentLength > 0)
+				{
+					string containerName = "your-container-name";
+					string blobName = Path.GetFileName(file.FileName);
+					BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+					BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+					using (Stream stream = file.InputStream)
+					{
+						await blobClient.UploadAsync(stream, true);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				var s = ex.Message.ToString();
+				System.Diagnostics.Debug.WriteLine(s);
+
+			}
+
+			return RedirectToAction("Material");
+		}
+
+
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
 		/// Drought information page view

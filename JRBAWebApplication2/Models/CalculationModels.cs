@@ -18,8 +18,9 @@ namespace JRBAWebApplication2.Models
 		public string UserId { get; set; }
 
 		public string CalculationName { get; set; }
+		public string Purpose { get; set; }
 
-		public DateTime CalculationDate { get; set; }
+		//public DateTime CalculationDate { get; set; }
 		public string BasinSelection { get; set; }
 		public string CropSelection { get; set; }
 		public double cropSize { get; set;}

@@ -17,9 +17,24 @@ namespace JRBAWebApplication2.Models
 		[Key]
 		public String UserId { get; set; } 
 
+		
+
 		public string FirstName { get; set; }
 
 		public string LastName { get; set; }
+
+		public string PhoneNo { get; set; }
+
+		public string StreetAddress { get; set; }
+
+		public string City { get; set; }
+
+
+		public string Province { get; set; }
+
+		public string Country { get; set; }
+
+
 
 
 		[Required]
