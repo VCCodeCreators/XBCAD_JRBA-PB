@@ -1,4 +1,5 @@
 ﻿using JRBAWebApplication2.Controllers;
+using JRBAWebApplication2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Web.Mvc;
@@ -38,7 +39,7 @@ namespace JRBAWebApplication2.Tests
             };
 
             // Act
-            ActionResult result = controller.Estimations();//model,form
+            ActionResult result = controller.Estimations(model,form);//model,form
 
             // Assert
             Assert.IsNotNull(result);
@@ -62,7 +63,7 @@ namespace JRBAWebApplication2.Tests
             };
 
             // Act
-            ActionResult result = controller.Estimations();//mode;, form
+            ActionResult result = controller.Estimations(model,form);//mode;, form
 
             // Assert
             Assert.IsNotNull(result);
@@ -102,9 +103,6 @@ namespace JRBAWebApplication2.Tests
             
         }
         //------------------------------------------------------------------------------------------------------------------\\
-        class CalculationModels
-        {
-            // If CalculationModels is a class used in your code, you can define it here.
-        }
+      
     }
 }
