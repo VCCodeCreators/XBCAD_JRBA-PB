@@ -17,7 +17,7 @@ namespace JRBAWebApplication2.Models
 		[ForeignKey("UserModel")]
 		public string UserId { get; set; }
 
-		public string CalculationName { get; set; }
+		//public string CalculationName { get; set; }
 		public string Purpose { get; set; }
 		public string SiteName { get; set; }
 		//public DateTime CalculationDate { get; set; }

@@ -11,6 +11,9 @@ using System.Web.Mvc;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Newtonsoft.Json.Linq;
+using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -64,7 +67,7 @@ namespace JRBAWebApplication2.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					
+
 					model.BasinSelection = form.AllKeys.Contains("BasinSelection") ? form["BasinSelection"] : null;
 					model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
 					//model.cropSize = Convert.ToDouble(form.AllKeys.Contains("cropSize") ? form["cropSize"] : null);
@@ -72,7 +75,7 @@ namespace JRBAWebApplication2.Controllers
 					string crop = model.CropSelection;
 					double cropSize = model.cropSize;
 					string estimatedAmount = "";
-					if (double.TryParse(form["cropSize"], out cropSize) && !cropSize.ToString().IsNullOrWhiteSpace()) 
+					if (double.TryParse(form["cropSize"], out cropSize) && !cropSize.ToString().IsNullOrWhiteSpace())
 					{
 						double WaterDuty = 0;
 
@@ -102,7 +105,7 @@ namespace JRBAWebApplication2.Controllers
 						model.FinalCalc = estimate;
 
 						//cropSize can't be negative number
-						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.ToString().IsNullOrWhiteSpace() || cropSize <=0)
+						if ((crop.Equals("Crop") || (basin.Equals("basin"))) || cropSize.ToString().IsNullOrWhiteSpace() || cropSize <= 0)
 						{
 							// Handle the case where required fields are empty
 							estimatedAmount = " Error: Invalid Input";
@@ -132,7 +135,61 @@ namespace JRBAWebApplication2.Controllers
 			// Return to the Estimations view with the updated model
 			return View("Estimations", model);
 		}
+		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// SaveEstimations
+		/// </summary>
+		/// <param name="model"></param>
+		/// <param name="form"></param>
+		/// <returns></returns>
+		[Authorize]
+		public ActionResult SaveEstimations(CalculationModels model, FormCollection form)
+		{
+			try
+			{
+				model.BasinSelection = form.AllKeys.Contains("BasinSelection") ? form["BasinSelection"] : null;
+				model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
+				model.cropSize = Convert.ToDouble(form.AllKeys.Contains("cropSize") ? form["cropSize"] : null);
+				model.SiteName = form.AllKeys.Contains("SiteName") ? form["SiteName"] : null;
+				model.Purpose = form.AllKeys.Contains("Description") ? form["Description"] : null;
+				string basin = model.BasinSelection;
+				string crop = model.CropSelection;
+				string siteName = model.SiteName;
+				string purpose = model.Purpose;
+				double cropSize = model.cropSize;
 
+				using (var dbContext = new ApplicationDbContext())
+				{
+					CalculationModels record = new CalculationModels
+					{
+						// Assign values to properties based on your data model
+						UserId = User.Identity.GetUserId(),
+						SiteName = siteName,
+						Purpose = purpose,
+						BasinSelection = basin,
+						CropSelection = crop,
+						cropSize = cropSize,
+						FinalCalc = model.FinalCalc
+					};
+
+					// Add the new record to the DbSet
+					dbContext.SavedCalcs.Add(record);
+
+					// Save changes to the database
+					dbContext.SaveChanges();
+
+
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+				ViewBag.EstimatedAmount = ex.ToString();
+
+			}
+			return View();
+
+		}
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
 		/// Material Page View
@@ -156,7 +213,7 @@ namespace JRBAWebApplication2.Controllers
 		/// UploadMaterial View
 		/// </summary>
 		/// <returns></returns>
-		[Authorize(Roles = "Admin")]
+		//[Authorize(Roles = "Admin")]
 		public ActionResult UploadMaterial()
 		{
 			return View();
@@ -170,14 +227,14 @@ namespace JRBAWebApplication2.Controllers
 		[HttpPost]
 		public async Task<ActionResult> UploadMaterial(HttpPostedFileBase file)
 		{
-			
+
 			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
 			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 			try
 			{
 				if (file != null && file.ContentLength > 0)
 				{
-					string containerName = "your-container-name";
+					string containerName = "jrba-blob";
 					string blobName = Path.GetFileName(file.FileName);
 					BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 					BlobClient blobClient = containerClient.GetBlobClient(blobName);
