@@ -171,7 +171,7 @@ namespace JRBAWebApplication2.Controllers
 						cropSize = cropSize,
 						FinalCalc = model.FinalCalc
 					};
-
+					ViewBag.EstimatedAmount = "Calculation has been successfully saved!";
 					// Add the new record to the DbSet
 					dbContext.SavedCalcs.Add(record);
 
