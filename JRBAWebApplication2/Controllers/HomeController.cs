@@ -14,6 +14,7 @@ using Azure.Storage.Blobs;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using Azure.Storage.Blobs.Models;
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -197,8 +198,44 @@ namespace JRBAWebApplication2.Controllers
 		/// <returns></returns>
 		public ActionResult Material()
 		{
-			return View();
+			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+			string containerName = "jrba-blob";
+			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+			//BlobContainerClient containerServiceClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+			List<string> blobNames = new List<string>();
+
+			foreach (BlobItem blobItem in containerClient.GetBlobs())
+			{
+				blobNames.Add(blobItem.Name);
+			}
+			return View(blobNames);
 		}
+		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
+		public FileResult DownloadFile(string fileName)
+		{
+			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+			string containerName = "jrba-blob";
+			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+			BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+
+			var stream = new MemoryStream();
+			blobClient.DownloadTo(stream);
+			stream.Seek(0, SeekOrigin.Begin);
+
+			return File(stream, "application/octet-stream", fileName);
+		}
+
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
 		/// Settings page View

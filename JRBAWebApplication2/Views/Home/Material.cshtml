@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<string>
+@{
     ViewBag.Title = "Settings";
 }
 
@@ -102,9 +103,22 @@
         <div class="material-title">Material Title 1</div>
         <div class="material-category">Category 1</div>
         <div class="material-description">Description of Material 1.</div>
-        <a href="#" class="material-link">Download Material</a>
+        <a href="#" onclick="location.href='@Url.Action("DownloadFile", "Home")'" class="material-link">Download Material</a>
         <button class="btn btn-link">View Details</button>
     </div>
+
+    @foreach (var blobName in Model)
+    {
+        <div class="material-item">
+            <div class="material-title">@Path.GetFileName(blobName)</div>
+            <div class="material-category">Category 1</div>
+            <div class="material-description">Description of Material 1.</div>
+            <a href="@Url.Action("DownloadFile", "Home", new { fileName = blobName })" class="material-link">Download Material</a>
+            <button class="btn btn-link">View Details</button>
+        </div>
+    }
+
+
 
     <div class="material-item">
         <div class="material-title">Material Title 2</div>
