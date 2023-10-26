@@ -196,6 +196,8 @@ namespace JRBAWebApplication2.Controllers
 		/// Material Page View
 		/// </summary>
 		/// <returns></returns>
+		List<string> blobNames = new List<string>();
+
 		public ActionResult Material()
 		{
 			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
@@ -205,7 +207,6 @@ namespace JRBAWebApplication2.Controllers
 			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 			//BlobContainerClient containerServiceClient = blobServiceClient.GetBlobContainerClient(containerName);
 
-			List<string> blobNames = new List<string>();
 
 			foreach (BlobItem blobItem in containerClient.GetBlobs())
 			{
@@ -221,17 +222,32 @@ namespace JRBAWebApplication2.Controllers
 		/// <returns></returns>
 		public FileResult DownloadFile(string fileName)
 		{
-			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
-			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-			string containerName = "jrba-blob";
-			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-			BlobClient blobClient = containerClient.GetBlobClient(fileName);
-
-
 			var stream = new MemoryStream();
-			blobClient.DownloadTo(stream);
-			stream.Seek(0, SeekOrigin.Begin);
+
+			try
+			{
+				string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+				BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+				string containerName = "jrba-blob";
+				BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+				if (blobNames != null && blobNames.Count > 0)
+				{
+					fileName = blobNames[0];
+					BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+					stream = new MemoryStream();
+					blobClient.DownloadTo(stream);
+					stream.Seek(0, SeekOrigin.Begin);
+				}
+			}
+			catch (Exception ex)
+			{
+				var error = ex.Message.ToString();
+				System.Diagnostics.Debug.WriteLine(error);
+				throw ex;
+			}
 
 			return File(stream, "application/octet-stream", fileName);
 		}
@@ -286,6 +302,8 @@ namespace JRBAWebApplication2.Controllers
 			{
 				var s = ex.Message.ToString();
 				System.Diagnostics.Debug.WriteLine(s);
+				System.Diagnostics.Debug.WriteLine(blobNames.ToString());
+
 
 			}
 
