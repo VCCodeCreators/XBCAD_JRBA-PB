@@ -43,8 +43,8 @@ namespace JRBAWebApplication2.Controllers
 		/// <returns></returns>
 		public ActionResult Estimations()
 		{
-			const decimal estimatedAmountDouble = 4235.34m;
-			string estimatedAmount = "R" + estimatedAmountDouble + " p/m";
+			decimal estimatedAmountDouble = 00.00m;
+			string estimatedAmount = "R" + estimatedAmountDouble + " p/a";
 			ViewBag.EstimatedAmount = estimatedAmount;
 
 			return View();
