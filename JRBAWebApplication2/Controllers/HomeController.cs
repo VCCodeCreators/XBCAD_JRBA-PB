@@ -198,7 +198,7 @@ namespace JRBAWebApplication2.Controllers
 		/// <returns></returns>
 		List<string> blobNames = new List<string>();
 
-		public ActionResult Material()
+		/*public ActionResult Material()
 		{
 			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
 			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
@@ -213,7 +213,23 @@ namespace JRBAWebApplication2.Controllers
 				blobNames.Add(blobItem.Name);
 			}
 			return View(blobNames);
+		}*/
+		public ActionResult Material()
+		{
+			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+			string containerName = "jrba-blob";
+			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+			// Retrieve the list of blob names
+			List<string> blobNames = containerClient.GetBlobs()
+				.Select(blobItem => blobItem.Name)
+				.ToList();
+
+			return View(blobNames);
 		}
+
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
 		/// 
