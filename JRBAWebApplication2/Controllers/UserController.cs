@@ -86,7 +86,7 @@ namespace JRBAWebApplication2.Controllers
 
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser { UserName = newUser.UserName, Id = newUser.UserId };
+				var user = new ApplicationUser { UserName = newUser.Email, Id = newUser.UserId };
 				var result = await UserManager.CreateAsync(user, newUser.Password);
 				if (result.Succeeded)
 				{
@@ -99,7 +99,7 @@ namespace JRBAWebApplication2.Controllers
 					newUser.UserRoles = "Common";
 
 					newUser.UserId = User.Identity.GetUserId();
-					newUser.UserName = User.Identity.GetUserName();
+					newUser.Email = User.Identity.GetUserName();
 
 					// Save the user to the database
 					db.User.Add(newUser);

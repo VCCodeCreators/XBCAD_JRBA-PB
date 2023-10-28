@@ -186,9 +186,11 @@ namespace JRBAWebApplication2.Controllers
 			{
 				System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
 				ViewBag.EstimatedAmount = ex.ToString();
+				return View("Estimations", model);
+
 
 			}
-			return View();
+			return View("Estimations", model);
 
 		}
 		//----------------------------------------------------------------------------------------------------\\
@@ -196,36 +198,37 @@ namespace JRBAWebApplication2.Controllers
 		/// Material Page View
 		/// </summary>
 		/// <returns></returns>
-		List<string> blobNames = new List<string>();
+		//List<string> blobNames = new List<string>();
 
-		/*public ActionResult Material()
-		{
-			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
-			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-			string containerName = "jrba-blob";
-			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-			//BlobContainerClient containerServiceClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-
-			foreach (BlobItem blobItem in containerClient.GetBlobs())
-			{
-				blobNames.Add(blobItem.Name);
-			}
-			return View(blobNames);
-		}*/
 		public ActionResult Material()
 		{
-			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
-			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+			var blobNames = new List<string>();
 
-			string containerName = "jrba-blob";
-			BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+			try
+			{
+				string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+				BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-			// Retrieve the list of blob names
-			List<string> blobNames = containerClient.GetBlobs()
-				.Select(blobItem => blobItem.Name)
-				.ToList();
+				string containerName = "jrba-blob";
+				BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+				// Create a list of blob names
+
+
+
+				// Retrieve the list of blob names
+				var blobs = containerClient.GetBlobs();
+
+				// Loop through the blobs and add their names to the list
+				foreach (var blob in blobs)
+				{
+					blobNames.Add(blob.Name);
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("An error occurred while fetching blob names: " + ex.Message);
+			}
 
 			return View(blobNames);
 		}
@@ -236,33 +239,37 @@ namespace JRBAWebApplication2.Controllers
 		/// </summary>
 		/// <param name="fileName"></param>
 		/// <returns></returns>
-		public FileResult DownloadFile(string fileName)
+		public async Task<FileResult> DownloadFile(string fileName)
 		{
 			var stream = new MemoryStream();
 
 			try
 			{
-				string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
-				BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-				string containerName = "jrba-blob";
-				BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-				if (blobNames != null && blobNames.Count > 0)
+				if (!string.IsNullOrEmpty(fileName))
 				{
-					fileName = blobNames[0];
+					string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+					BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+					string containerName = "jrba-blob";
+					BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
 					BlobClient blobClient = containerClient.GetBlobClient(fileName);
 
-					stream = new MemoryStream();
-					blobClient.DownloadTo(stream);
-					stream.Seek(0, SeekOrigin.Begin);
+					if (await blobClient.ExistsAsync())
+					{
+						stream = new MemoryStream();
+						blobClient.DownloadTo(stream);
+						stream.Seek(0, SeekOrigin.Begin);
+					}
+					else
+					{
+						System.Diagnostics.Debug.WriteLine("The file does not exist in the blob storage.");
+					}
 				}
 			}
 			catch (Exception ex)
 			{
-				var error = ex.Message.ToString();
-				System.Diagnostics.Debug.WriteLine(error);
-				throw ex;
+				System.Diagnostics.Debug.WriteLine("An error occurred while downloading the file" + ex);
 			}
 
 			return File(stream, "application/octet-stream", fileName);
@@ -296,9 +303,9 @@ namespace JRBAWebApplication2.Controllers
 		[HttpPost]
 		public async Task<ActionResult> UploadMaterial(HttpPostedFileBase file)
 		{
-
 			string connectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
 			BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
 			try
 			{
 				if (file != null && file.ContentLength > 0)
@@ -312,19 +319,29 @@ namespace JRBAWebApplication2.Controllers
 					{
 						await blobClient.UploadAsync(stream, true);
 					}
+
+					// File uploaded successfully
+					System.Diagnostics.Debug.WriteLine("Upload = good");
+					TempData["UploadMessage"] = "File uploaded successfully";
+					return View("Material");
+				}
+				else
+				{
+					// No file was selected for upload
+					System.Diagnostics.Debug.WriteLine("Upload = bad");
+					TempData["UploadMessage"] = "No file selected for upload";
+					return View();
 				}
 			}
 			catch (Exception ex)
 			{
-				var s = ex.Message.ToString();
-				System.Diagnostics.Debug.WriteLine(s);
-				System.Diagnostics.Debug.WriteLine(blobNames.ToString());
-
-
+				var errorMessage = ex.Message.ToString();
+				System.Diagnostics.Debug.WriteLine("problem is here:" + errorMessage);
+				TempData["UploadMessage"] = "An error occurred while uploading the file: " + errorMessage;
+				return View();
 			}
-
-			return RedirectToAction("Material");
 		}
+
 
 
 		//----------------------------------------------------------------------------------------------------\\

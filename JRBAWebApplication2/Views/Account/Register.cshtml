@@ -73,42 +73,54 @@
         right: 20px;
     }
 </style>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-<div class="register-container">
-    <img class="background-image" src="~/Images/RegPic.jpg" alt="Background Image" />
+    <div class="register-container">
+        <img class="background-image" src="~/Images/RegPic.jpg" alt="Background Image" />
 
-    <div class="form-card">
-        <div class="form-group">
-            <label class="form-label" for="FirstName">First name</label>
-            <input type="text" id="FirstName" name="FirstName" class="form-input" placeholder="Input first name" />
+        <div class="form-card">
+            <div class="form-group">
+                <label class="form-label" for="FirstName">First name</label>
+                <input type="text" id="FirstName" name="FirstName" class="form-input" placeholder="Input first name" />
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="LastName">Last name</label>
+                <input type="text" id="LastName" name="LastName" class="form-input" placeholder="Input last name" />
+                @Html.ValidationMessageFor(model => model.LastName)
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Email">Email</label>
+                <input type="email" id="Email" name="Email" class="form-input" placeholder="example.email@gmail.com" />
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Password">Password</label>
+                <input type="password" id="Password" name="Password" class="form-input" placeholder="Enter at least 8+ characters" />
+                @Html.ValidationMessageFor(model => model.Password)
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="ConfirmPassword">Confirm Password</label>
+                <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-input" placeholder="Re-enter your password" />
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+            </div>
+
+            <button type="submit" class="submit-button">Sign up</button>
+
+            <div class="form-footer">
+                Already have an account? <a href="/Login">Log in</a>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label" for="LastName">Last name</label>
-            <input type="text" id="LastName" name="LastName" class="form-input" placeholder="Input last name" />
-        </div>
-
-        <div class="form-group">
-            <label class="form-label" for="Email">Email</label>
-            <input type="email" id="Email" name="Email" class="form-input" placeholder="example.email@gmail.com" />
-        </div>
-
-        <div class="form-group">
-            <label class="form-label" for="Password">Password</label>
-            <input type="password" id="Password" name="Password" class="form-input" placeholder="Enter at least 8+ characters" />
-        </div>
-
-        <div class="form-group">
-            <label class="form-label" for="ConfirmPassword">Confirm Password</label>
-            <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-input" placeholder="Re-enter your password" />
-        </div>
-
-        <button type="submit" class="submit-button">Sign up</button>
-
-        <div class="form-footer">
-            Already have an account? <a href="/Login">Log in</a>
-        </div>
+        <img class="logo-image" src="~/Images/JRBA-LOGO.png" alt="Logo Image" />
     </div>
-
-    <img class="logo-image" src="~/Images/JRBA-LOGO.png" alt="Logo Image" />
-</div>
+}

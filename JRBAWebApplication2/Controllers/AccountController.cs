@@ -12,6 +12,7 @@ using JRBAWebApplication2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Data.Entity.Validation;
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -21,12 +22,16 @@ namespace JRBAWebApplication2.Controllers
 		//Property Decloration\\
 		private ApplicationSignInManager _signInManager;
 		private ApplicationUserManager _userManager;
+		private readonly UserManager<ApplicationUser> userManager;
 
 		private readonly ApplicationDbContext db = new ApplicationDbContext();
 		readonly ApplicationDbContext context;
 
-		public AccountController()
+		public AccountController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
 		{
+			this.userManager = userManager;
+			this.context = context;
+
 		}
 		//----------------------------------------------------------------------------------------------------\\
 		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -225,44 +230,81 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Register(RegisterViewModel model)
 		{
+
 			var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 			if (ModelState.IsValid)
 			{
+
 				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-				var result = await UserManager.CreateAsync(user, model.Password);
-				if (result.Succeeded)
+				var existingUser = await UserManager.FindByEmailAsync(model.Email);
+				if (existingUser != null)
 				{
-					if (!await RoleManager.RoleExistsAsync("Common"))
-					{
-						await RoleManager.CreateAsync(new IdentityRole("Common"));
-					}
-					model.UserRoles = "Common";
+					ModelState.AddModelError("Email", "Email not found or matched");
+					return View(model);
 
-					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-					// For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-					// Send an email with this link
-					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-					await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-					// Save the additional user data to your Azure SQL Database using Entity Framework
-					using (var dbContext = new ApplicationDbContext())
-					{
-						var userData = new UserModel
-						{
-							UserId = user.Id,
-							Email = model.Email,
-							UserRoles = model.UserRoles,
-							FirstName = model.FirstName,
-							LastName = model.LastName
-						};
-						dbContext.User.Add(userData);
-						dbContext.SaveChanges();
-					}
-					return RedirectToAction("Index", "Home");
 				}
-				AddErrors(result);
+				else
+				{
+					var result = await UserManager.CreateAsync(user, model.Password);
+
+					if (result.Succeeded)
+					{
+						if (!await RoleManager.RoleExistsAsync("Common"))
+						{
+							await RoleManager.CreateAsync(new IdentityRole("Common"));
+						}
+						model.UserRoles = "Common";
+
+						await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+
+						await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
+
+						using (var dbContext = new ApplicationDbContext())
+						{
+							var userData = new UserModel
+							{
+								//UserName = model.Email,
+								UserId = user.Id,
+								Email = model.Email,
+								UserRoles = model.UserRoles,
+								FirstName = model.FirstName,
+								LastName = model.LastName,
+								Password = model.Password
+							};
+							try
+							{
+								dbContext.User.Add(userData);
+
+
+								// Your code that saves data to the database
+								dbContext.SaveChanges();
+							}
+							catch (DbEntityValidationException ex)
+							{
+
+								foreach (var validationErrors in ex.EntityValidationErrors)
+								{
+									foreach (var validationError in validationErrors.ValidationErrors)
+									{
+										System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+									}
+								}
+								return View(model);
+
+							}
+							catch (HttpAntiForgeryException ex)
+							{
+								// Handle the exception, log it, and display a user-friendly error message.
+								ModelState.AddModelError(string.Empty, "Anti-forgery token validation failed. Please refresh the page and try again.");
+								// Optionally, redirect to an error page or take other actions.
+							}
+						}
+						return RedirectToAction("Index", "Home");
+					}
+					AddErrors(result);
+				}
 			}
 
 			return View(model);
