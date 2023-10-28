@@ -9,6 +9,7 @@ namespace JRBAWebApplication2.Models
 {
 	public class CalculationModels
 	{
+
 		// Primary key property
 		[Key]
 		public String CalculationId { get; set; }
@@ -16,6 +17,8 @@ namespace JRBAWebApplication2.Models
 		// Foreign key property
 		[ForeignKey("UserModel")]
 		public string UserId { get; set; }
+		public UserModel UserModel { get; set; }
+
 
 		//public string CalculationName { get; set; }
 		public string Purpose { get; set; }

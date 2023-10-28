@@ -15,14 +15,14 @@ namespace JRBAWebApplication2.Models
 
 		// Primary key property
 		[Key]
-		public String UserId { get; set; } 
+		public String UserId { get; set; }
 
-		
-		[Required]
+
+		[Required(ErrorMessage = "First name is required.")]
 		[Display(Name = "First Name")]
 		public string FirstName { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Last name is required.")]
 		[Display(Name = "Last Name")]
 		public string LastName { get; set; }
 
@@ -40,8 +40,8 @@ namespace JRBAWebApplication2.Models
 
 
 
-		[Required]
-		[EmailAddress]
+		[Required(ErrorMessage = "Email is required.")]
+		[EmailAddress(ErrorMessage = "Invalid email address.")]
 		[Display(Name = "Email")]
 		public string Email { get; set; }
 
@@ -50,7 +50,7 @@ namespace JRBAWebApplication2.Models
 		public string UserName { get; set; }
 
 
-		[Required]
+		[Required(ErrorMessage = "Password is required.")]
 		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
 		[DataType(DataType.Password)]
 		[Display(Name = "Password")]
