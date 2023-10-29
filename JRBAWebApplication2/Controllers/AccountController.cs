@@ -230,21 +230,19 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Register(RegisterViewModel model)
 		{
-
 			var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 			if (ModelState.IsValid)
 			{
-
-				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-				var existingUser = await UserManager.FindByEmailAsync(model.Email);
-				if (existingUser != null)
+				try
 				{
-					ModelState.AddModelError("Email", "Email not found or matched");
-					return View(model);
+					var existingUser = await UserManager.FindByEmailAsync(model.Email);
+					if (existingUser != null)
+					{
+						ModelState.AddModelError("Email", "Email not found or matched");
+						return View(model);
+					}
 
-				}
-				else
-				{
+					var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 					var result = await UserManager.CreateAsync(user, model.Password);
 
 					if (result.Succeeded)
@@ -253,19 +251,16 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 						{
 							await RoleManager.CreateAsync(new IdentityRole("Common"));
 						}
+
 						model.UserRoles = "Common";
-
-						await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-
+						await UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 						await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-
 
 						using (var dbContext = new ApplicationDbContext())
 						{
 							var userData = new UserModel
 							{
-								//UserName = model.Email,
+								UserName = model.Email,
 								UserId = user.Id,
 								Email = model.Email,
 								UserRoles = model.UserRoles,
@@ -273,42 +268,27 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 								LastName = model.LastName,
 								Password = model.Password
 							};
-							try
-							{
-								dbContext.User.Add(userData);
 
-
-								// Your code that saves data to the database
-								dbContext.SaveChanges();
-							}
-							catch (DbEntityValidationException ex)
-							{
-
-								foreach (var validationErrors in ex.EntityValidationErrors)
-								{
-									foreach (var validationError in validationErrors.ValidationErrors)
-									{
-										System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
-									}
-								}
-								return View(model);
-
-							}
-							catch (HttpAntiForgeryException ex)
-							{
-								// Handle the exception, log it, and display a user-friendly error message.
-								ModelState.AddModelError(string.Empty, "Anti-forgery token validation failed. Please refresh the page and try again.");
-								// Optionally, redirect to an error page or take other actions.
-							}
+							dbContext.User.Add(userData);
+							dbContext.SaveChanges(); // Save changes to the database
 						}
+
 						return RedirectToAction("Index", "Home");
 					}
-					AddErrors(result);
+					else
+					{
+						AddErrors(result);
+					}
+				}
+				catch (DbEntityValidationException ex)
+				{
+					// Handle validation errors, as you did
 				}
 			}
 
 			return View(model);
 		}
+
 
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>

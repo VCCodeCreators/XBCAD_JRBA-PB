@@ -212,11 +212,7 @@ namespace JRBAWebApplication2.Controllers
 				string containerName = "jrba-blob";
 				BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
-				// Create a list of blob names
-
-
-
-				// Retrieve the list of blob names
+			
 				var blobs = containerClient.GetBlobs();
 
 				// Loop through the blobs and add their names to the list
@@ -235,7 +231,7 @@ namespace JRBAWebApplication2.Controllers
 
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
-		/// 
+		/// Download file
 		/// </summary>
 		/// <param name="fileName"></param>
 		/// <returns></returns>
@@ -289,6 +285,7 @@ namespace JRBAWebApplication2.Controllers
 		/// UploadMaterial View
 		/// </summary>
 		/// <returns></returns>
+		//uncomment to add role based access control
 		//[Authorize(Roles = "Admin")]
 		public ActionResult UploadMaterial()
 		{
@@ -322,14 +319,13 @@ namespace JRBAWebApplication2.Controllers
 
 					// File uploaded successfully
 					System.Diagnostics.Debug.WriteLine("Upload = good");
-					TempData["UploadMessage"] = "File uploaded successfully";
-					return View("Material");
+					return RedirectToAction("Material");
+
 				}
 				else
 				{
 					// No file was selected for upload
 					System.Diagnostics.Debug.WriteLine("Upload = bad");
-					TempData["UploadMessage"] = "No file selected for upload";
 					return View();
 				}
 			}
@@ -337,7 +333,6 @@ namespace JRBAWebApplication2.Controllers
 			{
 				var errorMessage = ex.Message.ToString();
 				System.Diagnostics.Debug.WriteLine("problem is here:" + errorMessage);
-				TempData["UploadMessage"] = "An error occurred while uploading the file: " + errorMessage;
 				return View();
 			}
 		}
