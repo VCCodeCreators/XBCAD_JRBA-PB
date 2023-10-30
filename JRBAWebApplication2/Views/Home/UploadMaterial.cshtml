@@ -80,6 +80,14 @@
     <div style="padding-top: 12px; padding-bottom: 12px; padding-left: 20px; padding-right: 27px; left: 1019px; top: 654px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
         <div style="color: white; font-size: 18px; font-family: Encode Sans; font-weight: 400; line-height: 28px; word-wrap: break-word">Publish</div>
     </div>
+    @using (Html.BeginForm("UploadMaterial", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Choose a file to upload:</label>
+            <input type="file" name="file" id="file" class="form-control" />
+        </div>
+        <button type="submit" style="width: 163px;  padding-top: 9px; padding-bottom: 9px; padding-left: 50px; padding-right: 58px; left: 155px; top: 484px; position: absolute; background: #025034; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex; color: white; font-size: 16px; font-family: Encode Sans; font-weight: 400; line-height: 26px; word-wrap: break-word">Upload</button>
+    }
     <div style="padding-top: 12px; padding-bottom: 12px; padding-left: 20px; padding-right: 28px; left: 900px; top: 654px; position: absolute; background: rgba(0, 0, 0, 0); border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; display: inline-flex">
         <div style="color: #171A1F; font-size: 18px; font-family: Encode Sans; font-weight: 400; line-height: 28px; word-wrap: break-word">Preview</div>
     </div>
