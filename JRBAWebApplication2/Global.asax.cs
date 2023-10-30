@@ -16,6 +16,10 @@ namespace JRBAWebApplication2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var controllerActivator = new CustomControllerActivator();
+    var resolver = new DefaultControllerFactory(controllerActivator);
+   ControllerBuilder.Current.SetControllerFactory(resolver);
         }
     }
 }

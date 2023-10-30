@@ -32,6 +32,7 @@ namespace JRBAWebApplication2.Models
         }
 		//----------------------------------------------------------------------------------------------------\\
 		public DbSet<UserModel> User { get; set; }
+            public DbSet<CalculationModels> SavedCalcs { get; set; }
 
 	}
 }

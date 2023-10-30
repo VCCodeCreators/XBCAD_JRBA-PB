@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Settings";
+﻿@model List<string>
+@{
+    ViewBag.Title = "Material";
 }
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -93,7 +94,7 @@
                 <option value="category2">Category 2</option>
                 <!-- Add more categories as needed -->
             </select>
-            <button class="btn btn-primary">Filter</button>
+            <button onclick="location.href='@Url.Action("FilterButton", "Home")'" class="btn btn-primary">Filter</button>
         </div>
     </div>
 
@@ -105,6 +106,21 @@
         <a href="#" class="material-link">Download Material</a>
         <button class="btn btn-link">View Details</button>
     </div>
+    @if (Model != null)
+    {
+        foreach (var blobNames in Model)
+        {
+            <div class="material-item">
+                <div class="material-title">@Path.GetFileName(blobNames)</div>
+                <div class="material-category">Category 1</div>
+                <div class="material-description">Description of Material 1.</div>
+                <a href="@Url.Action("DownloadFile", "Home", new { fileName = blobNames })" class="material-link">Download Material</a>
+                <button class="btn btn-link">View Details</button>
+            </div>
+        }
+    }
+
+
 
     <div class="material-item">
         <div class="material-title">Material Title 2</div>
