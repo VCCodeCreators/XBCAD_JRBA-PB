@@ -23,6 +23,7 @@ namespace JRBAWebApplication2.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
         }
 		//----------------------------------------------------------------------------------------------------\\
 		public static ApplicationDbContext Create()
@@ -31,7 +32,7 @@ namespace JRBAWebApplication2.Models
 
         }
 		//----------------------------------------------------------------------------------------------------\\
-		public DbSet<UserModel> User { get; set; }
+		public DbSet<UserModel> Users { get; set; }
             public DbSet<CalculationModels> SavedCalcs { get; set; }
 
 	}

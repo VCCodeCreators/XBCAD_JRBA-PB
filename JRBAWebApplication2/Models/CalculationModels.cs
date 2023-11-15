@@ -7,6 +7,7 @@ using System.Web;
 
 namespace JRBAWebApplication2.Models
 {
+	[Table("SavedCalcs")]
 	public class CalculationModels
 	{
 
@@ -15,8 +16,8 @@ namespace JRBAWebApplication2.Models
 		public String CalculationId { get; set; }
 
 		// Foreign key property
-		[ForeignKey("UserModel")]
-		public string UserId { get; set; }
+		//[ForeignKey("UserModel")]
+		//public string UserId { get; set; }
 		public UserModel UserModel { get; set; }
 
 

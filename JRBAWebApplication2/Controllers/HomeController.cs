@@ -150,7 +150,7 @@ namespace JRBAWebApplication2.Controllers
 			{
 				model.BasinSelection = form.AllKeys.Contains("BasinSelection") ? form["BasinSelection"] : null;
 				model.CropSelection = form.AllKeys.Contains("CropSelection") ? form["CropSelection"] : null;
-				model.cropSize = Convert.ToDouble(form.AllKeys.Contains("cropSize") ? form["cropSize"] : null);
+				model.cropSize = form.AllKeys.Contains("cropSize") ? Convert.ToDouble(form["cropSize"]) : 0.0;
 				model.SiteName = form.AllKeys.Contains("SiteName") ? form["SiteName"] : null;
 				model.Purpose = form.AllKeys.Contains("Description") ? form["Description"] : null;
 				string basin = model.BasinSelection;
@@ -164,7 +164,8 @@ namespace JRBAWebApplication2.Controllers
 					CalculationModels record = new CalculationModels
 					{
 						// Assign values to properties based on your data model
-						UserId = User.Identity.GetUserId(),
+						CalculationId = Guid.NewGuid().ToString(),
+						//UserId = User.Identity.GetUserId(),
 						SiteName = siteName,
 						Purpose = purpose,
 						BasinSelection = basin,

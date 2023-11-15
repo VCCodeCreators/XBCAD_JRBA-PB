@@ -269,7 +269,7 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 								Password = model.Password
 							};
 
-							dbContext.User.Add(userData);
+							dbContext.Users.Add(userData);
 							dbContext.SaveChanges(); // Save changes to the database
 						}
 
