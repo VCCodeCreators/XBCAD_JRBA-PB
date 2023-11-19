@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNet.Identity;
 using System.Net;
 using Azure.Storage.Blobs.Models;
+using System.Data.Entity;
 
 namespace JRBAWebApplication2.Controllers
 {
@@ -173,12 +174,13 @@ namespace JRBAWebApplication2.Controllers
 						cropSize = cropSize,
 						FinalCalc = model.FinalCalc
 					};
-					ViewBag.EstimatedAmount = "Calculation has been successfully saved!";
 					// Add the new record to the DbSet
 					//dbContext.SavedCalcs.Add(record);
 
 					// Save changes to the database
+					//dbContext.Entry(record).State = EntityState.Modified;
 					dbContext.SaveChanges();
+					ViewBag.EstimatedAmount = "Calculation Saved!";
 
 
 				}

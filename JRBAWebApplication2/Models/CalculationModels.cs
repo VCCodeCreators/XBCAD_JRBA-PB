@@ -18,7 +18,7 @@ namespace JRBAWebApplication2.Models
 		// Foreign key property
 		//[ForeignKey("UserModel")]
 		//public string UserId { get; set; }
-		public UserModel UserModel { get; set; }
+		//public UserModel UserModel { get; set; }
 
 
 		//public string CalculationName { get; set; }
