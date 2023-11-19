@@ -175,7 +175,7 @@ namespace JRBAWebApplication2.Controllers
 					};
 					ViewBag.EstimatedAmount = "Calculation has been successfully saved!";
 					// Add the new record to the DbSet
-					dbContext.SavedCalcs.Add(record);
+					//dbContext.SavedCalcs.Add(record);
 
 					// Save changes to the database
 					dbContext.SaveChanges();

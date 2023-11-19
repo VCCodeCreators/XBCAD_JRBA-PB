@@ -32,8 +32,8 @@ Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContex
 
         }
 		//----------------------------------------------------------------------------------------------------\\
-		public DbSet<UserModel> Users { get; set; }
-            public DbSet<CalculationModels> SavedCalcs { get; set; }
+		//public DbSet<UserModel> Users { get; set; }
+        //public DbSet<CalculationModels> SavedCalcs { get; set; }
 
 	}
 }

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace JRBAWebApplication2.Models
 {
-	[Table("AspNetUsers")]
+	//[Table("AspNetUsers")]
 	public class UserModel
 	{
 

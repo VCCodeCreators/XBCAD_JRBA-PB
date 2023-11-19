@@ -92,68 +92,34 @@ namespace JRBAWebApplication2.Controllers
 				return View(model);
 			}
 
-			// This doesn't count login failures towards account lockout
-			// To enable password failures to trigger account lockout, change to shouldLockout: true
 			var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
 			switch (result)
 			{
 				case SignInStatus.Success:
-					return RedirectToLocal(returnUrl);
-				case SignInStatus.LockedOut:
-					return View("Lockout");
-				case SignInStatus.RequiresVerification:
-					return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+					return RedirectUser(returnUrl);
 				case SignInStatus.Failure:
 				default:
 					ModelState.AddModelError("", "Invalid login attempt.");
 					return View(model);
 			}
 		}
-		/*
-[HttpPost]
-[AllowAnonymous]
-[ValidateAntiForgeryToken]
-public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-{
-    if (!ModelState.IsValid)
-    {
-        return View(model);
-    }
-
-			string connectionString = ConfigurationManager.AppSettings["DefaultConnection"];
-
-    // Create a SqlConnection object with the connection string
-    var sqlConnection = new SqlConnection(connectionString);
-
-    // Get an access token using the DefaultAzureCredential class
-    var credential = new DefaultAzureCredential();
-    var token = credential.GetToken(new Azure.Core.TokenRequestContext(new[] { "https://database.windows.net/.default" }));
-
-    // Set the access token for the SqlConnection object
-    sqlConnection.AccessToken = token.Token;
-
-    // Create a SignInManager object using the SqlConnection object
-    var signInManager = new SignInManager(sqlConnection);
-
-    // This doesn't count login failures towards account lockout
-    // To enable password failures to trigger account lockout, change to shouldLockout: true
-    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-    switch (result)
-    {
-        case SignInStatus.Success:
-            return RedirectToLocal(returnUrl);
-        case SignInStatus.LockedOut:
-            return View("Lockout");
-        case SignInStatus.RequiresVerification:
-            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-        case SignInStatus.Failure:
-        default:
-            ModelState.AddModelError("", "Invalid login attempt.");
-            return View(model);
-    }
-}*/
-
-
+		//----------------------------------------------------------------------------------------------------\\
+		/// <summary>
+		/// redirects the user
+		/// </summary>
+		/// <param name="returnUrl"></param>
+		/// <returns></returns>
+		private ActionResult RedirectUser(string returnUrl)
+		{
+			if (Url.IsLocalUrl(returnUrl))
+			{
+				return Redirect(returnUrl);
+			}
+			else
+			{
+				return RedirectToAction("Dashboard", "Home");
+			}
+		}
 		//----------------------------------------------------------------------------------------------------\\
 		/// <summary>
 		/// GET: /Account/VerifyCode
@@ -269,7 +235,7 @@ public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 								Password = model.Password
 							};
 
-							dbContext.Users.Add(userData);
+							//dbContext.Users.Add(userData);
 							dbContext.SaveChanges(); // Save changes to the database
 						}
 

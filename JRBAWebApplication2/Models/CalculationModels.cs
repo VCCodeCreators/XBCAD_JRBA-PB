@@ -7,7 +7,7 @@ using System.Web;
 
 namespace JRBAWebApplication2.Models
 {
-	[Table("SavedCalcs")]
+	//[Table("SavedCalcs")]
 	public class CalculationModels
 	{
 

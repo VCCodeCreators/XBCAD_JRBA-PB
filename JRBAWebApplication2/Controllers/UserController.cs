@@ -102,7 +102,7 @@ namespace JRBAWebApplication2.Controllers
 					newUser.Email = User.Identity.GetUserName();
 
 					// Save the user to the database
-					db.Users.Add(newUser);
+					//db.Users.Add(newUser);
 					db.SaveChanges();
 
 					return RedirectToAction("Index", "Users");
