@@ -50,3 +50,9 @@ jobs:
       run: |
         # Add commands to run functional tests if needed
       shell: bash
+      
+    - name: Debug Information
+      run: |
+        echo "Current working directory: $PWD"
+        dir
+      shell: bash
