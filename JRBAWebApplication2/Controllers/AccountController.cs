@@ -213,12 +213,12 @@ namespace JRBAWebApplication2.Controllers
 
 					if (result.Succeeded)
 					{
-						if (!await RoleManager.RoleExistsAsync("Common"))
+						if (!await RoleManager.RoleExistsAsync("Admin"))
 						{
-							await RoleManager.CreateAsync(new IdentityRole("Common"));
+							await RoleManager.CreateAsync(new IdentityRole("Admin"));
 						}
 
-						model.UserRoles = "Common";
+						model.UserRoles = "Admin";
 						await UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 						await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

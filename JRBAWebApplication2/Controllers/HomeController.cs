@@ -289,7 +289,7 @@ namespace JRBAWebApplication2.Controllers
 		/// </summary>
 		/// <returns></returns>
 		//uncomment to add role based access control
-		//[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "Admin")]
 		public ActionResult UploadMaterial()
 		{
 			return View();
