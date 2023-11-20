@@ -76,22 +76,20 @@ namespace JRBAWebApplication2.Tests
         [TestCategory("Integration")]
         public void MyIntegrationTest()
         {
-	        // Arrange: Set up any necessary dependencies, data, or conditions for the test
+	        // Arrange
 	        HomeController controller = new HomeController();
 
-	        // Act: Simulate an interaction between components
+	        // Act
 	        ViewResult result = controller.Estimations() as ViewResult;
 
-	        // Assert: Verify the result or behavior
+	        // Assert
 	        Assert.IsNotNull(result);
-	        // Add more assertions as needed to check specific behavior
         }
         //------------------------------------------------------------------------------------------------------------------\\
         [TestMethod]
         [TestCategory("Regression")]
         public void MyRegressionTest()
         {
-            // This test method seems incomplete, and the code is commented out.
             
         }
         //------------------------------------------------------------------------------------------------------------------\\
@@ -99,7 +97,6 @@ namespace JRBAWebApplication2.Tests
         [TestCategory("Functional")]
         public void MyFunctionalTest()
         {
-            // This is where you would write functional test code.
             
         }
         //------------------------------------------------------------------------------------------------------------------\\
