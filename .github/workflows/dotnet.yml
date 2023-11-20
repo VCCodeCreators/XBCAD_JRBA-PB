@@ -33,7 +33,7 @@ jobs:
        cd JRBAWebApplication2.Tests
        nuget install MSTest.TestFramework -Version 2.1.2 -OutputDirectory packages
        nuget install MSTest.TestAdapter -Version 2.1.2 -OutputDirectory packages
-       packages\MSTest.TestAdapter.2.1.2\build_common\mstest.console.exe JRBAWebApplication2.Tests.dll
+       packages\MSTest.TestAdapter.2.1.2\build_common\mstest.console.exe bin\Debug\JRBAWebApplication2.Tests.dll
       shell: cmd
 
     - name: Run Integration Tests
