@@ -19,8 +19,7 @@ jobs:
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
-      with:
-        msbuild-version: latest
+     
 
     - name: Restore dependencies
       run: nuget restore JRBAWebApplication2.sln
@@ -31,9 +30,7 @@ jobs:
     - name: Run Unit Tests
       run: |
         cd JRBAWebApplication2.Tests
-        nuget install MSTest.TestFramework -Version 1.2.0 -OutputDirectory packages
-        nuget install MSTest.TestAdapter -Version 1.2.0 -OutputDirectory packages
-        packages\MSTest.TestAdapter.1.2.0\build\_common\mstest.console.exe /testcontainer:bin\Debug\JRBAWebApplication2.Tests.dll
+        dotnet vstest JRBAWebApplication2.Tests.dll
       shell: cmd
 
     - name: Run Integration Tests
