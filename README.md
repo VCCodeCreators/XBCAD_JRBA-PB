@@ -43,48 +43,138 @@ Together, we are dedicated to the success of this venture, and we look forward t
 
 ## Installation
 
-[Provide detailed installation instructions here.]
+To install the LibraryApp, follow these steps:
+
+1. Download the code from the [repository](https://github.com/VCCodeCreators/XBCAD_JRBA-PB.git).
+2. Ensure you have Visual Studio installed on your Windows system.
+3. Run the .sln file to open the project.
+
+Alternatively, you can click [here](#provide-link-to-the-app) to be redirected to the app.
+
 
 ## Usage
 
-[Explain how to use the software, including any necessary commands, inputs, or configurations.]
+### User Instructions:
+
+- **Dashboard:** View the dashboard in the "Dashboard" tab.
+
+- **Water Estimations:** Make a water calculation in the "Water Estimations" tab by filling in your details and pressing "Calculate."
+
+- **Educational Materials:** Explore educational materials by clicking the "Educational Materials" page. Download the materials you need.
+
+- **Settings:** Change your password by navigating to the "Settings" section.
+
+### Admin Instructions:
+
+Admins can log in using the provided information. Once logged in, they gain access to additional features:
+
+- **Educational Materials Upload:** Admins can upload educational materials for users.
+
 
 ## Contributing
 
-[If applicable, explain how others can get involved. Include guidelines for code style, pull request procedures, etc.]
+If you'd like to contribute to the app, please follow these guidelines:
+
+1. Open an issue to report bugs or suggest features.
+
+2. Fork the repository and create a new branch for your contribution.
+
+3. Make your changes and submit a pull request for review.
 
 ## Credits
 
-[Acknowledge the authors and contributors of the project. Include links to their profiles or relevant resources.]
+We extend our gratitude to the following contributors:
+
+- **Varsity College:** For providing valuable resources and support.
+
+- **Joint River Basin Authorities:** For sharing crucial data that contributes to the functionality of our app.
+
+- **VCCodeCreators Organization Members:**
+  - [@Bakhombisile02](https://github.com/Bakhombisile02): Project Manager and Software Developer.
+  - [@AlpharGwenzi](https://github.com/AlpharGwenzi): Business Analyst and Technical Editor.
+  - [@mattbosch](https://github.com/mattbosch): Designer and Software Architect.
+  - [@SandraHabibu1](https://github.com/SandraHabibu1): Day to day Team Leader and Customer Representative.
+  - [@st10082120 (Daniel Heilbron)](https://github.com/st10082120): Software Developer and Head Tester.
 
 ## License
 
-[Specify the license under which the project is distributed.]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
-[Recognize any external resources, libraries, or tools used in the project. Give credit to authors or projects that have influenced your work.]
+- **Azure:** For their robust cloud computing services.
 
 ## FAQ or Troubleshooting
 
-[Address common questions or issues that users might encounter. Provide solutions or direct them to relevant resources.]
+### The Application is Still Missing
+
+**Q:** Why can't I find the application after installation?
+
+**A:** The application might be under active development. Please refer to the [repository](https://github.com/VCCodeCreators/XBCAD_JRBA-PB.git) for the latest updates and releases.
+
+---
+
+### Admin Dashboard
+
+**Q:** I can't locate the admin dashboard. Where is it?
+
+**A:** The admin dashboard might be in development. Stay tuned for future updates. If you encounter issues, please [open an issue](#provide-link-to-issue-tracker) to report it.
+
+---
+
+### WhatsApp API Integration
+
+**Q:** Is WhatsApp API integration available?
+
+**A:** Currently, WhatsApp API integration is not implemented. Keep an eye on our [roadmap](#provide-link-to-roadmap) for future feature releases.
+
+---
+
+### Calculations Saving
+
+**Q:** Why aren't my calculations being saved?
+
+**A:** Calculations saving functionality may not be implemented yet. Check for updates in the [changelog](#changelog) or [open an issue](#provide-link-to-issue-tracker) if you are experiencing difficulties.
 
 ## Changelog
 
-[Provide a list of changes for each version of the project.]
+### Version 1.0
+
+- Initial release of the application.
 
 ## Testing
 
-[If relevant, provide information on how to run tests for the project.]
+### Manual Testing:
+
+Once installed (follow the process outlined in [Installation](#installation)), you can perform manual testing as follows:
+
+1. Go to the Unit tests.
+2. Right-click and then press "Run Unit Tests."
+
+### Automated Testing:
+
+We have set up a GitHub pipeline that automatically performs testing. Continuous integration ensures that the latest changes are thoroughly tested.
 
 ## Contact Information
 
-[Include a way for users to contact the project maintainers or contributors for questions or support.]
+For any inquiries or support related to the project, please contact:
+
+- **Project Manager:** Bakhombisile Dlamini
+  - Email: [st10082221@vcconnect.edu.za](mailto:st10082221@vcconnect.edu.za)
+
+- **Head Tester:** Daniel Heilbron
+  - Email: [st10082120@vcconnect.edu.za](mailto:st10082120@vcconnect.edu.za)
 
 ## Security Information
-Security webhook: https://github.com/VCCodeCreators/XBCAD_JRBA-PB/settings/hooks/443104426
-[If there are any security considerations or precautions, make users aware of them.]
+
+### Reporting Security Issues
+
+If you discover any security-related issues or vulnerabilities, please report them to our security team by emailing [st10082120@vcconnect.edu.za](mailto:st10082120@vcconnect.edu.za). We appreciate your responsible disclosure.
 
 ## Disclaimer
 
-[If applicable, mention any limitations or known issues with the project.]
+### Limitations and Liability
+
+This project is provided "as is" with no warranties or guarantees. The developers and contributors are not liable for any potential damages or misuses of the software. Use it at your own risk.
+
+[Include any additional disclaimers or legal information as needed.]
