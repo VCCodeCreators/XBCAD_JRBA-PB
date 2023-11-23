@@ -11,6 +11,12 @@ namespace JRBAWebApplication2
 	
 public class DependencyClass : DefaultControllerFactory
 {
+        /// <summary>
+        /// // This is the method that gets called to create a controller instance
+        /// </summary>
+        /// <param name="requestContext"></param>
+        /// <param name="controllerType"></param>
+        /// <returns></returns>
     protected override IController GetControllerInstance(System.Web.Routing.RequestContext requestContext, Type controllerType)
     {
         if (controllerType != null)
@@ -34,6 +40,7 @@ public class DependencyClass : DefaultControllerFactory
 }
    
 
+    
 public class CustomControllerActivator : IControllerActivator
 {
     public IController Create(RequestContext requestContext, Type controllerType)
@@ -62,3 +69,4 @@ public class CustomControllerActivator : IControllerActivator
 	}
 
 }
+//----------------------------------------...ooo000 END OF FILE 000ooo...----------------------------------------//

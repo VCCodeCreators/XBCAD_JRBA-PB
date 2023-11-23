@@ -1,19 +1,114 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/JRBAlogo.ico" rel="icon" type="image/x-icon" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .sidebar {
+            height: 100vh;
+            width: 250px; /* Set initial width to show icons and text */
+            background-color: #333;
+            position: fixed;
+            overflow-x: hidden;
+            margin-top: 56px; /* Adjusted for top navbar */
+        }
 
-    </head>
+            .sidebar a {
+                padding: 10px;
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181 !important; /* Add !important to ensure this color takes precedence */
+                display: block;
+            }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #343A40;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            padding: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .sidebar-link:hover {
+                background-color: #E9ECEF;
+                transform: scale(1.05);
+            }
+
+            .sidebar-link.selected {
+                background-color: #218838;
+                color: #FFFFFF;
+                transform: scale(1.05);
+            }
+
+                .sidebar-link.selected i {
+                    color: #FFFFFF;
+                }
+
+        .bi {
+            display: inline-block;
+            position: relative;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            top: -1px;
+            background-size: cover;
+        }
+
+        .bi-house-door-fill {
+            background-image: url("data:imagepng;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE0ElEQVR4nO2aXYxdUxTHf1fNHRLT0U6ZFm3wQmk8EJ6aoKIvSrVSTCTeiGaa8oD4SEx5ayYm+siDiIiKj0hqlEQE0QqRlpheU1+dFm+qQREd07mykv9OltPzee85dy7pP9kPc/bZa6999vr4r3UHTuL/izOBtcAo8CYwCRwBjmkc0bNxvXMT0E+XoA4MAW8BM0Cz4JjRoW+XrI6jF9gM/OCU+gt4HxgB1gGXAAuAHim5QM/W6Z0PdFNh/ffApk4e6Hrga6fA58A9UjQOp2vEYSGwUTKCPDO/VVXfwjZgVht+AawBahnrvgG+ynjHZNwI7JNs22Osits5C/jYmdADMpk8CF86D3qAB7WHrfkIGKAkLAP2S/C3wOVubkS+0u5B7gUec39fARxwpraUEm4iHGIPcLabmwf8LjNYmSLDItrOlPmVkmGyTnHPB4G92vvLdm6m15mTHWJ+zDsjmrcNW0VQ1mRF0e/md7fqM9ucOfmb8DgNaADf5XD6ONRkQg3JisOgMzMLAIVD7KyczvtEHE7V7bWKXslIw5XKObNFQnOvwqV9gfvpHjzknD+XiW12eSJ8qUXMPeoyQdNtOM/LgXZYsjPcp79fBs6jM1imcGy+9657vla6HMq6lSFHO2rOX47q+S/AORUpbyZ9K/A2cNzlH0uKATVZSlPvpsb8priTh93Ei8BEmZlWuAx4Cjgcw47fiaH6w5qzciCxnphRpEoigGWhX2Tx0xSK/2wCDbIPOa0Rl9u4WQLeq/AARj2eVhZvOnN9BtjhCOOWDDm7In78L4ymZNh2cC7wqBJrUP64zGZIVP51R0jvyCHzcb2/NW5yXJN2M2XArv25SOV4SF/7fJe1P9Hcz8DVOWWv1xq7xRMQiqXlJRxiUHVI+MovAasjpHC5ox4WZi8uIP9SrTNCewJC1AhRyRztQo2iFOR5yXpVDDqKa9WMaIqYJnE5tHfQo8claFv7EzEI9XNINIG+N5Uks/hQ3Eexm4niTrfXayllMFL8R6fHfne4cNuZB9muK7fxRkF2+5tkLXbPagokoVR+MmJqcajJd4Me2/McJGpa7SBEoVeAJWIDL7gWUCZXykCqaQXGay2bdnGR8wE/jibF/oJY4Zhw5eF3qYjmr7Jzi/kXlCR7fVr4DQkxK6t2A55IS4iBIlu3sNuxW7rekEQa/1b0MtoQxbwkklYR5mvPOEcPpLEvafFOndSYqcdqBYM/IiG1KiwB/tSetrfHpjT/CLgtprC620Wdz4AzqB592ivse1dMYbUhTUBdXfGmerFowZQaEXnbpGWgR3tOOaVDqXEwjy7h6vZ1WPEs1NVxjDP9xAWTWmAN5W7BI9KpUeQDX+cadFbVzTWucg26a4ouHtMXOJDAYjuFxfKJppJ2YdTViglN6rn44bLfRa8P2/HZAedgE6q/O3kTe51fxCXpwuQvHGZKDeVO+MRBd4jSOpwDjt+Y0z1cUWiuKzodc+a0sIpNxlyF1xDRbOV3kShqSnaTrrc1WnUeW+U2DF374RYry0VKwBNOXqOVENvO7QyrTxUUmJYpbFHhs0KHq2sM6NktarDtEtsO680nNs4Vm6irKz4eUSrvmFZjY0M30aE+1eNbRbEn1dAI/1RzWNFvh95Zk1ZPnAT/cfwDEo+f3YTgTbYAAAAASUVORK5CYII=");
+        }
+
+        .bi-settings-fill {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE00lEQVR4nO2aWWhdVRSGP6xJixm01qoYW4fYwRSxILGtig8VfFD0QWlFELHUJ/tisaDUAaR1qm2ijU8OLxWHN4cHp6JWwfqirVAFFa1DakUQ1CQ114yy4D+wPDl373PPPTdytT9ccnPX2sPaZ++1/rX2geP4f+AxYBKYTn3GgS00EQYzjEg+B2gSdAJTwCgwx/3eod8rwIk0AVZr5Q9myL6XbDn/Is4BNgMLI3obNNkXM2SvS7Yu0sdC4E5gESVjCXBEk/gFuDag+7j07suQPSzZg4H2a4GfpPcj0E1JuMAZ8bv+2l7vA+amdFuA96RzQ0ZfN0v2Zur8GFqBHc7b/VGmMd6IfTqw9wBj+u0zoAc4H3gK+NV5J2ubxnIn/1lP7yxgKfCJc9Fb5TQ+LMOYs1NGtDlZL/C1ZKMa3L5PAO8Dtwb6vR34WE91Wl5sRN+/AVY53faUMV1FDEkO7Z/AqRlyG+Q56QwDjwJn1Og8BmSI9bFHTyGNBZqD6dxWxBB7Al+pg50BvYs1WFF0pZ5CGrs0hy9Tu6ImXKLzMClvMtu4UmOPR4zNhQe0IkeqbLFG4RTgh4ArrxlGJ/arwxeYPbykMT/KcNV1BcTkwK2k8bjCOZHSAiLy8xMKUvNz6K8A+oHP5VpH9L1fshgW62za4p1OiXhGK7QtotcqlzoRoPEm2y3dEJ6W/vayjJinJ2ErdFrEiL0uSD4BXCqX2Sav86SLG3sjxiyVnh34E4pM/GRgjSLwLhdZ3460G3AR+KJI3EkSL3syIRyQ3jviYRu0OFmB8x/pabXMbipCvVdoy4xGjPDGVNTGuFo13BHYorZgj2Q1SljnMRG4PSKI1+vwhdCvtvY3L3arjbHomMe8EbhXOc5BLdi05jwDiaVF9uMXamtkMi9Wqc2hAuPNcfOdgaqCHBhWWyOSedGuNkMFx5xuhCFDBQzpdAlUQwzpqGNrmUeptUhRZGt1hAwZdx7qW+AVBcB1OWhCctgtTuRF4q7NxYewDLgJeAh4DTjskjKb8wxskd+u1OF+K3KtMRhf+yuH+91UxfVWNNe7Ymy3x63Cu2r8Vk53OhgxZqVLoS365wmIb2h3rAcuLFrgm6fqyVgkE2xxFKUiw1bLAbSLLQzoSSQUxdo0jKLUQ+BaZUCINI7rSbTkHHMbJWKJJjdUA43vk0ca1ueQDnboTCRY1Cga3+NoQR4uVS8u01gj2mKlYK74jXX8LLOH5zXmpzlyl1zod8WzIsGyKNpdEdAofF24WjGklHJMAfTqrNgcrinaiZX2j2pF7o4MFsoc8xTo7ExUw1bN4WiOK41MbFYHv1XJyOa7ks2IErMza+j/XBW+EybxchWP2OluAezOpGYsdhnjB6ly5VplaEki5ovYVvC+JdDvxowidpIGDAJXOd02jZ1khIUvfrqdMfsU2Xe6bHK/dM5TIEyuFaZUpM6KR/5aYYeuFbpdEXBS8WaBxqz7WiHLmKRIN6YyZroC2OIGvy6jr/WumJBua//f7+5ekrEGyyzS2ep+p46N4l8e0O0LOIjtOWhHryrviRFZF0Z1oUv3EydF9Da6+440XpXMmHUIbSr9FLrYKQtrNFmrxKRxWDKj4k3zwsCxFP1uuhcGcIlTU7/Cge4Tq71UE0xPj4P/CP4GdM3Fkxh1C08AAAAASUVORK5CYII=");
+        }
+
+        .bi-log-out-fill {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNklEQVR4nO3aMU4DMRCF4R8KWiRofRHEwWi3gcBNOEEaxAEoAhR0tCzXcGTJkdAqGzyJgt4MfpJLS/NpdtdrywBnwAPwDWSRMQKLWltz7gUKnxt3FshYJ12hk+sfnWnORq+WbK2rQ46c3Dsiltw7IpabKB0pGQgCMaVDjphHYAmce+/Iqtb0YsEoQhLwWesqqAuvkL0wqpAp5vU3jDLEhFGHbMNc4hTShPECmWLephhPkJ0Yb5BZzCGQE+Bd4NhodSjktL547iFhHi2pz3B2BEm71hIvkBRhQUwt/1vqkNT6O68MSZY9iSokRdhYpShb3Y8ohw/PwFOE46C90iF/kCFCRwZrXaqQ3CFiyb0jYsn/tiNjnVAusqhdqvmyTFoIHOfMjVsLpFzuKphNZxRG6URBNF88WwOccZGxk5w4qAAAAABJRU5ErkJggg==");
+        }
+
+
+        .bi-setting-fill {
+            background-image: url("data:image/png;base64,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");
+        }
+
+        .bi-up-fill {
+            background-image: url("");
+        }
+
+        .bi-sg-fill {
+            background-image: url("");
+        }
+
+        .bi-plus-square-fill {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABSElEQVR4nO2aUU7DMAyGv6cdodwFwa2Y4AaMuyDxsA3eKRXiFW1HGNcoqpROeVio27hbEvxJ1qbMqv3XTrM2BcMwxrIAnoAfoE3MDsDK5TjIKoGE2wHrchzk4Jyv0aEPrsGNV5mzBr7o8VoTkmlFGqDWDHwpIRp+D8ArUHljlRu7z0nIm/ttB1w527mxbU5CKi/x7tP/XkXGDTo2goWqnhC4q8Le89u7sbH5iR1rgZD3HIQU01pz+G3/mOybCcdTT1DqtwTWJy6/a+AuMq7YsQ7MicmBhdh/rVisIgH+b2u1idsgxQkpprW0MCEBrCIhPoBvCmitZ2dqgYVYa8WSXEUa5Xv2uZ4BnP2efa5nAEdsQcxljpxaR74oQMgL8KkZWIjNkVisIrEnpt8M7TYeU6vI7ZjN0By2px8lQhZOTF+ZbF8YMAyDI7/6dTrXCsyoUgAAAABJRU5ErkJggg==");
+        }
+
+        .bi-list-nested {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFEElEQVR4nO2aTWxVRRTHf62VPlIivge1usBYFkYD0ULcuJWoVFIp7lB0YVDcFLSQ6EZo2FnZiGnC0rhwyaKIiEYE/Ij4ARoTsJSyQYhBLHFh+eaZE/+TnFzuu+/e19t3G8M/meTeO2fOnJk558yZMxdu4/+LCtAPvAvsBX4DJoErKvZ8QnVGsxooM0tQAl4EPgNuANWM5TqwH1gHtBcxgLnAZuCcE+oycAB4WyvzsGb8TpWyvlndVuBLtQntzwKDmpymYBUw4QT4AVgPzG+A193AK8CPjt8poJcZhM3ULtfhT8BTOfJfCRxz/EdmYnXuleDWwT/AAHBH3p3wH89NwJRb7a68mHdruavyOkuZeTwCjKnPcckwLXQ6ht8DC2keysDX6ntCWtEQSk6dvgU6aD46gO+cmjVkM7ucOtlmVxQWOK0wB5DZxQbDboZNpLGZKclk3i31Zhf2CfNOswWvO+NPpWJb3D4xHRc7TxNxUmVA3xpFG/CzZLNBJaJdoYIRP9lgh+ZdhoC/YmKrv4H3gPsb5P2M+JyrtyrrnIfIiseAj4CrTvDDwBqVw+77VdFamyxocZ70+STCz0VksVMatAJ9rl1VUfAe4PEY+mXAh5HBWpz1klQnDTao3b5aBBWF1ZdTBIBB/8OOb+Ui8A6wKIUwi0R7MRIsDqSwo7LON9dqyblGDL/IqP/m4d5UJJsVJvSr2quy2NEh0Zo23IIdqrTzRBb9N/WaLloz2tGQaIbjmO1V5bMN6n9eWJbCjoL2jMYxOKlKO8XhArag/8Mx+m/vazVDHwAHtWGd1hl90vEI76fV10G1GRKPON5RO/pKdUv0bnmBW3BBlRbbGL5xDLbK9QU8pGPtzQbO6bWK8Tog3gEtUvVAYzKhKNze/4wbyBVVznGhyogT1pIE96lu3J3TLfGwHXgZeAJ4UOeHciRLEt67RbNCbbaLRzi/22oFx/KpG+SIZAobd+i/7kAC+tyMnI+830V+MF6Bb5/68n16JA4kqloeURUIz3mjGunDa4FHompFjT2ug8FICmeu1MkCzffl0X7V3nJexn1TZVLfJkSzR222iIfxCnytjzcidumRaOwfq3J1wkAMj7r3Szkau+dlfSQh0f3ucB4qaSBE9hVL4exU9sMmoQdYrPN+WbPaoudO1fWIdpPaHotkKushcUPsV6VlAKOIdnC8xkCMx3IJ2yXhW1XK+rZYNP01BnK87jDqhChlFzT6uGmFG4g9I2F2O0+XRzFeu8U7CRUXNNb0mvvF1NKYAT7CtWcPY/S08sA7pbO/yKD/kIHfUJnUtwnRjKrNZvFI68pfkyyfJBG94GKbqDfzm1VRaAGOShYLa2qi5I66NkuGt9xA7LlIrJIcZ9JcQwyK+KiSDx1qeKagJF1Am1TSZNtICpScXZhXQR7GSpEYlExjWS6FetVoSsmxotHjNszMVxkjbgbi4q9modNF2+blMqOktFBVieQi7GMecEQyHJnOPWOnArNwrWDvzULFHe5O5XHh0+2WdixFQJeXTYy7veuBvBh3OTWbUu41bUItC9rknS45dbon705KzgFUlVDuzXHHts0u7BPBsGf07n2lW/aqcrEbGvyLoaLYKYQdValSnrfFdVfH1Ov3SPRq4fU2HXyWyG3PUVmgS6PnRHMoEj1b5LCxqD8g2pUV36cjQNbQ/ZoSg2uLGkAc5uugM6zz+AklNMJPNRd0aBoVTV/OWZjbYDbhXxK1LJe5B/MJAAAAAElFTkSuQmCC");
+        }
+
+        .bi-news-nested {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRklEQVR4nO2aTWgTQRTHf9ZYlEpITcFioYKgHipFqpdAIZdWKvXQey/iUfCgIL2ZHr0pCL1IGwTFS0Fq0rs3MbSIaMB+gfEiqG2kLaUHJbLwVpZ0spllk/2o84d32HnzduY/M+89eDNgEE30AldClCGg0y+JY8AWUAtZZvwSScmPfgNLIci6jP+qVUSqhIMJQ6QOZkdahEN3tJaBKQ25A4wCiagSscb3Eq43gIwOkcU25IqCC5EPwEOF2DluE5gDHgMladsFLjQjUmwDkdcefeSqY25nHe1HgOeie9mMSFBwIzItuicK3XnR/RJikSYyK7pbDWxtv0pGyUdURPKiu9mESCrqPpJvBZGgYIhgdqQ9MEeL/+1ojQD7LqF0T/p4yTuFOBApmjyCSYhV4yMYH4lPQkxr1HhPxSH8ftIIv+U4EMlp1HlzYRAJCpEjkjY+gvGRqvERF2Q1CtDDHp39qegmdXYkKR87PsPvF408UlFM5oboFhS6y8Aje6IKbDsLdB3AH2no8kFkvEER2iljLvXdN3hDl9hZc/yHNWm8RPA4LWN/t2u4mrgodiuqs2gVjcPAkoyf9WBzV2yeORszjlU5Q/C4LeOXgBMa/Y8Dn8Xmer1yXhTW6vQRLBJy9VaTIkZ3kwcO9t3IW9VxtIw/SoefwAPgHMHBGsuOfN+A+3ULehS4BryTPj/qLn8OkLHZ1hw/DeoVREURHb8C7+VCx25bBQZ1Vsdyuhdyb1eLkJSBe8BJr9ttnb/+kF8ODUhi7PE6+VjiL90N26Lxhr6xAAAAAElFTkSuQmCC");
+        }
+
+    </style>
+
+
+
+</head>
 <body>
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-top">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("JRBA Web App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -30,74 +125,44 @@
         </div>
     </nav>
 
-    <style>
-        /* Add this style block in your HTML file */
-        .sidebar a {
-            transition: all 0.3s ease-in-out;
-        }
+    <!-- Improved Sidebar and Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar" style="background-color: #F8F9FA;">
+                <div class="sidebar-sticky">
+                    <img style="width: 100%; max-width: 188px; height: auto; border-radius: 12px; margin-bottom: 16px;" src="~/Images/JRBA-LOGO.png" alt="Logo" />
+                    <a href="~/Home/Dashboard" class="sidebar-link">
+                        <i class="bi bi-house-door-fill"></i>
+                        Dashboard
+                    </a>
+                    <a href="~/Home/Estimations" class="sidebar-link">
+                        <i class="bi bi-plus-square-fill"></i>
+                        Calculate
+                    </a>
+                    <a href="~/Home/Material" class="sidebar-link">
+                        <i class="bi bi-list-nested"></i>
+                        Educational Material
+                    </a>
+                    <a href="~/Home/UploadMaterial" class="sidebar-link">
+                        <img style="display: inline-block; width: 1.25rem; height: 1.25rem; margin-right: 0.75rem; top: -1px; background-size: cover;" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/external-upload-interface-kiranshastry-solid-kiranshastry" alt="external-upload-interface-kiranshastry-solid-kiranshastry" />
+                        Upload Material
+                    </a>
+                    <a href="~/Home/Settings" class="sidebar-link">
+                        <img style="display: inline-block; width: 1.25rem; height: 1.25rem; margin-right: 0.75rem; top: -1px; background-size: cover;" src="https://img.icons8.com/carbon-copy/100/settings.png" alt="settings" />
+                        Settings
+                    </a>
+                </div>
+            </nav>
 
-            .sidebar a:hover {
-                background-color: #E9ECEF;
-                transform: scale(1.05);
-            }
-
-            .sidebar a.selected {
-                background-color: #218838;
-                color: #FFFFFF;
-                transform: scale(1.05);
-            }
-
-                .sidebar a.selected i {
-                    color: #FFFFFF;
-                }
-    </style>
-
-    <!-- Improved Sidebar -->
-    <div class="sidebar" style="background-color: #F8F9FA;">
-        <img style="width: 100%; max-width: 188px; height: auto; border-radius: 12px; margin-bottom: 16px;" src="~/Images/JRBA-LOGO.png" alt="Logo" />
-        <a href="~/Home/Dashboard" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px;margin-top:30px; font-size: 0.9em;">
-            <i class="bi bi-house-door-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
-            Dashboard
-        </a>
-        <a href="~/Home/Estimations" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em;">
-            <i class="bi bi-plus-square-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
-            Calculate
-        </a>
-        <a href="~/Home/Material" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em;">
-            <i class="bi bi-list-nested" style="font-size: 1.2em; margin-right: 8px;"></i>
-            Educational Material
-        </a>
-
-        <a href="~/Home/Settings" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 16px; margin-top: 380px; font-size: 0.9em;">
-            <i class="bi bi-list-nested" style="font-size: 1.2em; margin-right: 8px;"></i>
-            Settings
-        </a>
-        <a href="" style="text-decoration: none; color: #343A40; display: flex; align-items: center; margin-bottom: 16px; font-size: 0.9em;">
-            <i class="bi bi-plus-square-fill" style="font-size: 1.2em; margin-right: 8px;"></i>
-            Logout
-        </a>
-    </div>
-
-    <script>
-        // Add this script block at the end of your HTML body
-        document.querySelectorAll('.sidebar a').forEach(function (item) {
-            item.addEventListener('click', function () {
-                document.querySelectorAll('.sidebar a').forEach(function (link) {
-                    link.classList.remove('selected');
-                });
-                this.classList.add('selected');
-            });
-        });
-    </script>
-
-
-    <!-- Main Content -->
-    <div class="main-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - JRBA-PB web app</p>
-        </footer>
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4" style="margin-left: 250px; padding-top: 70px;">
+                <!-- Your main content goes here -->
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - JRBA-PB web app</p>
+                </footer>
+            </main>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

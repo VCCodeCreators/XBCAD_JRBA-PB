@@ -95,7 +95,7 @@
 
     <div class="dashboard-item">
         <h3>Time</h3>
-        <p>Thursday September 4, 20:43</p>
+        <p id="current-time"></p>
     </div>
 
     <div class="dashboard-item">
@@ -115,16 +115,41 @@
             <canvas id="barChart"></canvas>
         </div>
 
-        <!-- Chart 2: Line Chart -->
-        <div class="chart-container">
-            <canvas id="lineChart"></canvas>
-        </div>
+        
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+    function updateFormattedTime() {
+        var now = new Date();
+
+        // Array of month names
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // Array of day names
+        var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var dayOfWeek = dayNames[now.getDay()];
+        var month = monthNames[now.getMonth()];
+        var dayOfMonth = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+
+        var formattedTime = dayOfWeek + " " + month + " " + dayOfMonth + ", " + hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+
+        document.getElementById("current-time").innerText = formattedTime;
+    }
+
+    // Update the time every second
+    setInterval(updateFormattedTime, 1000);
+
+    // Initial call to display the time immediately
+    updateFormattedTime();
+
+
     // Dummy data for the charts
     const barChartData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
